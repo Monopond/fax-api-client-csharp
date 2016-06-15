@@ -86,7 +86,7 @@ To send a fax to a single destination a request similar to the following example
 ###Setting-up your faxes with retries:
 To set-up apiFaxMessage to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
-//create a new fax message.
+            //create a new fax message.
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
