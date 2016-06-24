@@ -84,7 +84,7 @@ To send a fax to a single destination a request similar to the following example
 ```
 
 ###Setting-up your faxes with retries:
-To set-up apiFaxMessage to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
+To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
             //create a new fax message.
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
@@ -97,6 +97,82 @@ To set-up apiFaxMessage to have retries a request similar to the following examp
             apiFaxMessage1.RetriesSpecified = true;
             apiFaxMessage1.Retries = 2;
             
+```
+
+###Assigning a Resolution in fax:
+To set-up a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Resolution = faxResolution.fine;
+            apiFaxMessage1.ResolutionSpecified = true;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
+```
+
+###Assigning a FaxDitheringTechnique in a fax:
+To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+            apiFaxDocument.DitheringTechnique = faxDitheringTechnique.DETAILED;
+            apiFaxDocument.DitheringTechniqueSpecified = true;
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Resolution = faxResolution.fine;
+            apiFaxMessage1.ResolutionSpecified = true;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
 ```
 
 ###Sending multiple faxes:
