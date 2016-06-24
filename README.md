@@ -100,7 +100,7 @@ To set-up a fax to have retries a request similar to the following example can b
 ```
 
 ###Assigning a Resolution in fax:
-To set-up a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
+To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
