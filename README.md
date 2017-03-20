@@ -3,20 +3,20 @@ fax-api-client-csharp
 
 Monopond Fax API C# Client
 
-###Overview:
+### Overview:
 
 * This is a C# soap web serice client for monopond web serivces.
 * This client was tested in Microsoft Visual C# 2010. If you encountered problems using the client, consult with your account manager.
 * Provides concrete classes that you can use to map values to requests and read responses.
 * To gain access to the system you must have a Monopond user account that is flagged with Fax API privileges. 
 
-###Basic Usage:
+### Basic Usage:
 
 To use Monopond SOAP C# Client, start by adding a reference to `monopondSOAPClient.cs`. To do this right click your project in the Solution Explorer, click on `Add > Existing Item > monopondSOAPClient.cs`. Then, add another reference to System.Web.Services, to do this, right click on the Solution Explorer, click on `add reference > .NET tab > System.Web.Services` then click OK.   
 
 In the project folder, a file called `Program.cs` is provided to show you several examples of how to use the requests.
 
-#Building A Request
+# Building A Request
 
 Create a new instance of the ApiService. This service needs a WSDL, your username and your password. We have two environments for the wsdl, so choose one that is appropriate for you: 
 
@@ -41,8 +41,8 @@ string password = "password";
 ApiService apiClient = new ApiService(TEST_URL, username, password);
 ```
 
-#SendFax
-###Description
+# SendFax
+### Description
 This is the core function in the API allowing you to send faxes on the platform. 
 
 Your specific faxing requirements will dictate which send request type below should be used. The two common use cases would be the sending of a single fax document to one destination and the sending of a single fax document to multiple destinations.
@@ -83,7 +83,7 @@ To send a fax to a single destination a request similar to the following example
 
 ```
 
-###Setting-up your faxes with retries:
+### Setting-up your faxes with retries:
 To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
             //create a new fax message.
@@ -99,7 +99,7 @@ To set-up a fax to have retries a request similar to the following example can b
             
 ```
 
-###Assigning a Resolution in a fax:
+### Assigning a Resolution in a fax:
 To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
 ```C#
@@ -136,7 +136,7 @@ To assign a fax to have a `Resolution` in the request similar to the following e
 
 ```
 
-###Assigning a FaxDitheringTechnique in a fax:
+### Assigning a FaxDitheringTechnique in a fax:
 To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
 
 ```C#
@@ -175,7 +175,7 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
 
 ```
 
-###Sending multiple faxes:
+### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
 ```C#
         private static void sendFaxSample(ApiService apiClient)
@@ -216,7 +216,7 @@ To send faxes to multiple destinations a request similar to the following exampl
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
-###Sending faxes to multiple destinations with the same document (broadcasting):
+### Sending faxes to multiple destinations with the same document (broadcasting):
 To send the same fax content to multiple destinations (broadcasting) a request similar to the example below can be used.
 
 This method is recommended for broadcasting as it takes advantage of the multiple tiers in the send request. This eliminates the repeated properties out of the individual fax message elements which are instead inherited from the parent send fax request. An example below shows “SendFrom” being used for both FaxMessages. While not shown in the example below further control can be achieved over individual fax elements to override the properties set in the parent.
@@ -329,7 +329,7 @@ private static void sendFaxSample_docMergeData(ApiService apiClient)
         }
 ```
 
-###Sending Tiff and PDF files with StampMergeData:
+### Sending Tiff and PDF files with StampMergeData:
 (This request only works in version 2.1(or higher) of the fax-api.)
 
 This request allows a PDF or TIFF file to be stamped with an image or text, based on X-Y coordinates. The x and y coordinates (0,0) starts at the top left part of the document. The screenshots below are examples of what the request does.
@@ -424,7 +424,7 @@ private static void sendFaxSample_stampMergeData_TextAndImageStamp(ApiService ap
         }
 ```
 
-###sendFaxRequest Properties:
+### sendFaxRequest Properties:
 **Name**|**Required**|**Type**|**Description**|**Default**
 -----|-----|-----|-----|-----
 **BroadcastRef**||String|Allows the user to tag all faxes in this request with a user-defined broadcastreference. These faxes can then be retrieved at a later point based on this reference.|
