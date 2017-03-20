@@ -47,7 +47,7 @@ This is the core function in the API allowing you to send faxes on the platform.
 
 Your specific faxing requirements will dictate which send request type below should be used. The two common use cases would be the sending of a single fax document to one destination and the sending of a single fax document to multiple destinations.
 
-###Sending a single fax:
+### Sending a single fax:
 To send a fax to a single destination a request similar to the following example can be used:
 
 ```C#
@@ -549,10 +549,10 @@ TODO: The default value is set to: “From %from%, To %to%|%a %b %d %H:%M %Y”
 |**fileName** |  | *String* | The document filename including extension. This is important as it is used to help identify the document MIME type. |
 |**fileData** |  | *Base64* | The document encoded in Base64 format. |
 
-###Response
+### Response
 The response received from a `SendFaxRequest` matches the response you receive when calling the `FaxStatus` method call with a `send` verbosity level.
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **InvalidArgumentsException, NoMessagesFoundException, DocumentContentTypeNotFoundException, or InternalServerException.**
 You can find more details on these faults [here](#section5).
@@ -589,7 +589,7 @@ There are multiple levels of verbosity available in the request; these are expla
 | **results** |Includes the results from ***“send”*** along with the sending results of the fax messages. |
 | **all** | all Includes the results from both ***“details”*** and ***“results”*** along with some extra uncommon fields. |
 
-###Sending a faxStatus Request with “brief” verbosity:
+### Sending a faxStatus Request with “brief” verbosity:
 
 ```C#
 private static void faxStatusSample(ApiService apiClient)
@@ -604,7 +604,7 @@ private static void faxStatusSample(ApiService apiClient)
         }
 ```
 
-###Sending a faxStatus Request with “send” verbosity:
+### Sending a faxStatus Request with “send” verbosity:
 
 ```C#
 private static void faxStatusSample(ApiService apiClient)
@@ -619,7 +619,7 @@ private static void faxStatusSample(ApiService apiClient)
         }
 ```
 
-###Sending a faxStatus Request with “details” verbosity:
+### Sending a faxStatus Request with “details” verbosity:
 
 ```C#
 private static void faxStatusSample(ApiService apiClient)
@@ -634,7 +634,7 @@ private static void faxStatusSample(ApiService apiClient)
         }
 ```
 
-###Sending a faxStatus Request with “results” verbosity:
+### Sending a faxStatus Request with “results” verbosity:
 
 ```C#
 private static void faxStatusSample(ApiService apiClient)
@@ -648,7 +648,7 @@ private static void faxStatusSample(ApiService apiClient)
             faxStatusResponse response = apiClient.FaxStatus(faxStatusRequest);
         }
 ```
-###Response
+### Response
 The response received depends entirely on the verbosity level specified.
 
 **FaxStatusResponse:**
@@ -747,22 +747,22 @@ Contains the total count of how many faxes ended in each result, as well as some
 | **FAX_NO_ANSWER** | No answer |
 | **FAX_UNKNOWN** | Unknown fax error |
 
-###SOAP Faults
+### SOAP Faults
 
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults [here](#section5).
 
-##StopFax
+## StopFax
 
-###Description
+### Description
 Stops a fax message from sending. This fax message must either be paused, queued, starting or sending. Please note the fax cannot be stopped if the fax is currently in the process of being transmitted to the destination device.
 
 When making a stop request you must provide at least a `BroadcastRef`, `SendRef` or `MessageRef`. The function will also accept a combination of these to further narrow down the request.
 
-###Request
-####StopFaxRequest Properties:
+### Request
+#### StopFaxRequest Properties:
 
 | Name | Required | Type | Description |
 | --- | --- | --- | --- | --- |
@@ -770,7 +770,7 @@ When making a stop request you must provide at least a `BroadcastRef`, `SendRef`
 | **SendRef** |  | *String* | User-defined send reference. |
 | **MessageRef** |  | *String* | User-defined message reference. |
 
-###StopFax Request limiting by BroadcastRef:
+### StopFax Request limiting by BroadcastRef:
 ```C#
 private static void stopFaxSample(ApiService apiClient)
         {
@@ -783,7 +783,7 @@ private static void stopFaxSample(ApiService apiClient)
         }
 ```
 
-###StopFax Request limiting by SendRef:
+### StopFax Request limiting by SendRef:
 
 ```C#
 private static void stopFaxSample(ApiService apiClient)
@@ -797,7 +797,7 @@ private static void stopFaxSample(ApiService apiClient)
         }
 ```
 
-###StopFax Request limiting by MessageRef:
+### StopFax Request limiting by MessageRef:
 ```C#
 private static void stopFaxSample(ApiService apiClient)
         {
