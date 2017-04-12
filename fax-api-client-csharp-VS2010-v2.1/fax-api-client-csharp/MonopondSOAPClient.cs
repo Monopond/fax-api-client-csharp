@@ -24,7 +24,7 @@ using System.Xml.Serialization;
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Web.Services.WebServiceBindingAttribute(Name="ApiServiceSoapBinding", Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Web.Services.WebServiceBindingAttribute(Name="ApiServiceSoapBinding", Namespace="https://api.monopond.com/fax/soap/v2.2")]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnsupportedDocumentContentType))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnknownHostException))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(InterruptedException))]
@@ -59,6 +59,7 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
         {
             security = new Security();
             security.UsernameToken = new UsernameToken(username, password);
+
         }
     }
     
@@ -88,9 +89,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("ResumeFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)]
+    [return: System.Xml.Serialization.XmlElementAttribute("ResumeFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)]
     [SoapHeader("security")]
-    public resumeFaxResponse ResumeFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] resumeFaxRequest ResumeFaxRequest) {
+    public resumeFaxResponse ResumeFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)] resumeFaxRequest ResumeFaxRequest) {
         object[] results = this.Invoke("ResumeFax", new object[] {
                     ResumeFaxRequest});
         return ((resumeFaxResponse)(results[0]));
@@ -131,9 +132,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("StopFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)]
+    [return: System.Xml.Serialization.XmlElementAttribute("StopFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)]
     [SoapHeader("security")]
-    public stopFaxResponse StopFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] stopFaxRequest StopFaxRequest) {
+    public stopFaxResponse StopFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)] stopFaxRequest StopFaxRequest) {
         object[] results = this.Invoke("StopFax", new object[] {
                     StopFaxRequest});
         return ((stopFaxResponse)(results[0]));
@@ -174,9 +175,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("DeleteFaxDocumentResponse", Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)]
+    [return: System.Xml.Serialization.XmlElementAttribute("DeleteFaxDocumentResponse", Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)]
     [SoapHeader("security")]
-    public deleteFaxDocumentResponse DeleteFaxDocument([System.Xml.Serialization.XmlElementAttribute(Namespace = "https://api.monopond.com/fax/soap/v2.1", IsNullable = true)] deleteFaxDocumentRequest DeleteFaxDocumentRequest)
+    public deleteFaxDocumentResponse DeleteFaxDocument([System.Xml.Serialization.XmlElementAttribute(Namespace = "https://api.monopond.com/fax/soap/v2.2", IsNullable = true)] deleteFaxDocumentRequest DeleteFaxDocumentRequest)
     {
         object[] results = this.Invoke("DeleteFaxDocument", new object[] {
                     DeleteFaxDocumentRequest});
@@ -218,9 +219,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("FaxDocumentPreviewResponse", Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)]
+    [return: System.Xml.Serialization.XmlElementAttribute("FaxDocumentPreviewResponse", Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)]
     [SoapHeader("security")]
-    public faxDocumentPreviewResponse FaxDocumentPreview([System.Xml.Serialization.XmlElementAttribute(Namespace = "https://api.monopond.com/fax/soap/v2.1", IsNullable = true)] faxDocumentPreviewRequest FaxDocumentPreviewRequest)
+    public faxDocumentPreviewResponse FaxDocumentPreview([System.Xml.Serialization.XmlElementAttribute(Namespace = "https://api.monopond.com/fax/soap/v2.2", IsNullable = true)] faxDocumentPreviewRequest FaxDocumentPreviewRequest)
     {
         object[] results = this.Invoke("FaxDocumentPreview", new object[] {
                     FaxDocumentPreviewRequest});
@@ -262,9 +263,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("SendFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)]
+    [return: System.Xml.Serialization.XmlElementAttribute("SendFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)]
     [SoapHeader("security")]
-    public sendFaxResponse SendFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] sendFaxRequest SendFaxRequest) {
+    public sendFaxResponse SendFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)] sendFaxRequest SendFaxRequest) {
         object[] results = this.Invoke("SendFax", new object[] {
                     SendFaxRequest});
         return ((sendFaxResponse)(results[0]));
@@ -305,9 +306,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("SaveFaxDocumentResponse", Namespace="https://api.monopond.com/fax/soap/v2.1")]
+    [return: System.Xml.Serialization.XmlElementAttribute("SaveFaxDocumentResponse", Namespace="https://api.monopond.com/fax/soap/v2.2")]
     [SoapHeader("security")]
-    public saveFaxDocumentResponse SaveFaxDocument([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] saveFaxDocumentRequest SaveFaxDocumentRequest) {
+    public saveFaxDocumentResponse SaveFaxDocument([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)] saveFaxDocumentRequest SaveFaxDocumentRequest) {
         object[] results = this.Invoke("SaveFaxDocument", new object[] {
                     SaveFaxDocumentRequest});
         return ((saveFaxDocumentResponse)(results[0]));
@@ -335,6 +336,7 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
         if ((this.SaveFaxDocumentOperationCompleted == null)) {
             this.SaveFaxDocumentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveFaxDocumentOperationCompleted);
         }
+
         this.InvokeAsync("SaveFaxDocument", new object[] {
                     SaveFaxDocumentRequest}, this.SaveFaxDocumentOperationCompleted, userState);
     }
@@ -348,9 +350,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("FaxStatusResponse", Namespace="https://api.monopond.com/fax/soap/v2.1")]
+    [return: System.Xml.Serialization.XmlElementAttribute("FaxStatusResponse", Namespace="https://api.monopond.com/fax/soap/v2.2")]
     [SoapHeader("security")]
-    public faxStatusResponse FaxStatus([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] faxStatusRequest FaxStatusRequest) {
+    public faxStatusResponse FaxStatus([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)] faxStatusRequest FaxStatusRequest) {
         object[] results = this.Invoke("FaxStatus", new object[] {
                     FaxStatusRequest});
         return ((faxStatusResponse)(results[0]));
@@ -391,9 +393,9 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     
     /// <remarks/>
     [System.Web.Services.Protocols.SoapDocumentMethodAttribute("", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Bare)]
-    [return: System.Xml.Serialization.XmlElementAttribute("PauseFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)]
+    [return: System.Xml.Serialization.XmlElementAttribute("PauseFaxResponse", Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)]
     [SoapHeader("security")]
-    public pauseFaxResponse PauseFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] pauseFaxRequest PauseFaxRequest) {
+    public pauseFaxResponse PauseFax([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2", IsNullable=true)] pauseFaxRequest PauseFaxRequest) {
         object[] results = this.Invoke("PauseFax", new object[] {
                     PauseFaxRequest});
         return ((pauseFaxResponse)(results[0]));
@@ -443,7 +445,7 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class resumeFaxRequest : apiRequest {
     
     private string messageRefField;
@@ -499,7 +501,7 @@ public partial class resumeFaxRequest : apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public abstract partial class apiRequest {
 }
 
@@ -508,7 +510,7 @@ public abstract partial class apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class UnsupportedDocumentContentType {
 }
 
@@ -517,7 +519,7 @@ public partial class UnsupportedDocumentContentType {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class UnknownHostException {
 }
 
@@ -526,7 +528,7 @@ public partial class UnknownHostException {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class InterruptedException {
 }
 
@@ -535,7 +537,7 @@ public partial class InterruptedException {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class webFaultBean {
     
     private string messageField;
@@ -557,7 +559,7 @@ public partial class webFaultBean {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxErrorAdapter {
     
     private string codeField;
@@ -592,7 +594,7 @@ public partial class faxErrorAdapter {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxMessageStatusResults {
     
     private faxErrorAdapter errorField;
@@ -807,7 +809,7 @@ public partial class apiFaxMessageStatusResults {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
 [System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public enum faxResult {
     
     /// <remarks/>
@@ -825,7 +827,7 @@ public enum faxResult {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxMessageStatusDetails {
     
     private string sendFromField;
@@ -936,7 +938,7 @@ public partial class apiFaxMessageStatusDetails {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
 [System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public enum faxResolution {
     
     /// <remarks/>
@@ -951,7 +953,7 @@ public enum faxResolution {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxMessageStatus {
     
     private apiFaxMessageStatusDetails faxDetailsField;
@@ -1063,7 +1065,7 @@ public partial class apiFaxMessageStatus {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
 [System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public enum faxUserStatus {
     
     /// <remarks/>
@@ -1105,7 +1107,7 @@ public enum faxUserStatus {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxResultsTotals {
     
     private long successField;
@@ -1270,7 +1272,7 @@ public partial class faxResultsTotals {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxStatusTotals {
     
     private long pendingField;
@@ -1469,7 +1471,7 @@ public partial class faxStatusTotals {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiResponse {
 }
 
@@ -1478,7 +1480,7 @@ public partial class apiResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class saveFaxDocumentResponse : apiResponse {
 }
 
@@ -1487,7 +1489,7 @@ public partial class saveFaxDocumentResponse : apiResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxDocumentPreviewResponse : apiResponse {
     
     private string tiffPreviewField;
@@ -1535,7 +1537,7 @@ public partial class faxDocumentPreviewResponse : apiResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class deleteFaxDocumentResponse : apiResponse {
 }
 
@@ -1548,7 +1550,7 @@ public partial class deleteFaxDocumentResponse : apiResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxStatusResponse : apiResponse {
     
     private faxStatusTotals faxStatusTotalsField;
@@ -1597,7 +1599,7 @@ public partial class faxStatusResponse : apiResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class pauseFaxResponse : faxStatusResponse {
 }
 
@@ -1606,7 +1608,7 @@ public partial class pauseFaxResponse : faxStatusResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class sendFaxResponse : faxStatusResponse {
 }
 
@@ -1615,7 +1617,7 @@ public partial class sendFaxResponse : faxStatusResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class stopFaxResponse : faxStatusResponse {
 }
 
@@ -1624,7 +1626,7 @@ public partial class stopFaxResponse : faxStatusResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class resumeFaxResponse : faxStatusResponse {
 }
 
@@ -1633,7 +1635,7 @@ public partial class resumeFaxResponse : faxStatusResponse {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxMessageBlocklist {
     
     private bool dncrField;
@@ -1720,7 +1722,7 @@ public partial class apiFaxMessageBlocklist {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxDocument {
     
     private string documentRefField;
@@ -1837,7 +1839,7 @@ public partial class apiFaxDocument {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
 [System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public enum faxDitheringTechnique {
     
     /// <remarks/>
@@ -1876,7 +1878,7 @@ public enum faxDitheringTechnique {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxDocumentDocMergeField {
     
     private string keyField;
@@ -1911,7 +1913,7 @@ public partial class apiFaxDocumentDocMergeField {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxDocumentStampMergeField {
     
     private apiFaxDocumentStampMergeFieldKey keyField;
@@ -1959,7 +1961,7 @@ public partial class apiFaxDocumentStampMergeField {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxDocumentStampMergeFieldKey {
     
     private int xCoordField;
@@ -2020,7 +2022,7 @@ public partial class apiFaxDocumentStampMergeFieldKey {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxDocumentStampMergeFieldTextValue {
     
     private string fontNameField;
@@ -2081,7 +2083,7 @@ public partial class apiFaxDocumentStampMergeFieldTextValue {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxDocumentStampMergeFieldImageValue {
     
     private string fileNameField;
@@ -2168,7 +2170,7 @@ public partial class apiFaxDocumentStampMergeFieldImageValue {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class apiFaxMessage {
     
     private string messageRefField;
@@ -2412,7 +2414,7 @@ public partial class apiFaxMessage {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class pauseFaxRequest : apiRequest {
     
     private string messageRefField;
@@ -2460,7 +2462,7 @@ public partial class pauseFaxRequest : apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxStatusRequest : apiRequest {
     
     private string messageRefField;
@@ -2524,7 +2526,7 @@ public partial class faxStatusRequest : apiRequest {
 /// <remarks/>
 [System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
 [System.SerializableAttribute()]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public enum faxStatusLevel {
     
     /// <remarks/>
@@ -2548,7 +2550,7 @@ public enum faxStatusLevel {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class saveFaxDocumentRequest : apiRequest {
     
     private string documentRefField;
@@ -2596,7 +2598,7 @@ public partial class saveFaxDocumentRequest : apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class sendFaxRequest : apiRequest {
     
     private string broadcastRefField;
@@ -2854,7 +2856,7 @@ public partial class sendFaxRequest : apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class faxDocumentPreviewRequest : apiRequest {
     
     private string documentRefField;
@@ -2956,7 +2958,7 @@ public partial class faxDocumentPreviewRequest : apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class deleteFaxDocumentRequest : apiRequest {
     
     private string documentRefField;
@@ -2978,7 +2980,7 @@ public partial class deleteFaxDocumentRequest : apiRequest {
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.2")]
 public partial class stopFaxRequest : apiRequest {
     
     private string messageRefField;
@@ -3232,31 +3234,43 @@ public partial class PauseFaxCompletedEventArgs : System.ComponentModel.AsyncCom
 public class UsernameToken
 {
     private String usernameField;
+
     public string Username
     {
         get { return this.usernameField; }
         set { this.usernameField = value; }
     }
-
-    private String passwordField;
-    public string Password
-    {
-        get { return this.passwordField; }
-        set { this.passwordField = value; }
-    }
-
+    
     public UsernameToken(string username, string password)
     {
         this.Username = username;
-        this.Password = password;
+        this.Password = new Password() {Value = password};
     }
 
+    [XmlElement]
+    public Password Password { get; set; }
+
     public UsernameToken() { }
+}
+
+public class Password 
+{
+    public Password() 
+    {
+        Type = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText";
+    }
+
+    [XmlAttribute]
+    public string Type { get; set; }
+
+    [XmlText]
+    public string Value { get; set; }
 }
 
 [XmlRoot("Security", Namespace = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd")]
 public class Security : SoapHeader
 {
+
     public UsernameToken UsernameToken;
 
     public Security()
