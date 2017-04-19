@@ -355,7 +355,19 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
     public faxStatusResponse FaxStatus([System.Xml.Serialization.XmlElementAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1", IsNullable=true)] faxStatusRequest FaxStatusRequest) {
         object[] results = this.Invoke("FaxStatus", new object[] {
                     FaxStatusRequest});
-        return ((faxStatusResponse)(results[0]));
+
+        faxStatusResponse response = ((faxStatusResponse)(results[0]));
+
+        foreach (apiFaxMessageStatus faxMessage in response.FaxMessages)
+        {
+            if (faxMessage.status != faxUserStatus.done)
+            {
+                int elementIndex = faxMessage.FaxResults.Length - 1;
+                faxMessage.FaxResults[elementIndex].result = faxResult.no_result_yet;
+            }
+        }
+
+        return response;
     }
     
     /// <remarks/>
@@ -811,6 +823,9 @@ public partial class apiFaxMessageStatusResults {
 [System.SerializableAttribute()]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
 public enum faxResult {
+    
+    /// <remarks/>
+    no_result_yet,
     
     /// <remarks/>
     success,
