@@ -640,6 +640,8 @@ public partial class apiFaxMessageStatusResults {
     private System.DateTime dateCallEndedField;
     
     private bool dateCallEndedFieldSpecified;
+
+    private string csiField;
     
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -814,6 +816,17 @@ public partial class apiFaxMessageStatusResults {
         }
         set {
             this.dateCallEndedFieldSpecified = value;
+        }
+    }
+
+    // <remarks/>
+    [System.Xml.Serialization.XmlAttributeAttribute()]
+    public string csi {
+        get {
+            return this.csiField;
+        }
+        set {
+            this.csiField = value;
         }
     }
 }
