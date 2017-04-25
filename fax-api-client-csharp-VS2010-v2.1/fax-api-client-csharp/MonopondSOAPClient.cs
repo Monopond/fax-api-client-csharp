@@ -359,13 +359,16 @@ public partial class ApiService : System.Web.Services.Protocols.SoapHttpClientPr
 
         faxStatusResponse response = ((faxStatusResponse)(results[0]));
 
-        foreach (apiFaxMessageStatus faxMessage in response.FaxMessages)
+        if(response.FaxMessages != null) 
         {
-            if (faxMessage.status != faxUserStatus.done)
+            foreach (apiFaxMessageStatus faxMessage in response.FaxMessages)
             {
-                int elementIndex = faxMessage.FaxResults.Length - 1;
-                apiFaxMessageStatusResults[] resultsArray = faxMessage.FaxResults;
-                faxMessage.FaxResults = resultsArray.Where(value => value != resultsArray[elementIndex]).ToArray();
+                if (faxMessage.status != faxUserStatus.done)
+                {
+                    int elementIndex = faxMessage.FaxResults.Length - 1;
+                    apiFaxMessageStatusResults[] resultsArray = faxMessage.FaxResults;
+                    faxMessage.FaxResults = resultsArray.Where(value => value != resultsArray[elementIndex]).ToArray();
+                }
             }
         }
 
