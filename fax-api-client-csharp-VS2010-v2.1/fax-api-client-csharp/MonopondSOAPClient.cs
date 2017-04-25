@@ -840,9 +840,6 @@ public partial class apiFaxMessageStatusResults {
 public enum faxResult {
     
     /// <remarks/>
-    no_result_yet,
-    
-    /// <remarks/>
     success,
     
     /// <remarks/>
