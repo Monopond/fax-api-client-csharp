@@ -118,7 +118,7 @@ To set-up a fax to have retries a request similar to the following example can b
             
 ```
 
-### Assigning a Resolution in a fax:
+### Sending a Fax with Resolution:
 To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
 ```C#
@@ -155,7 +155,7 @@ To assign a fax to have a `Resolution` in the request similar to the following e
 
 ```
 
-### Assigning a FaxDitheringTechnique in a fax:
+### Sending a Fax with FaxDitheringTechnique:
 To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
 
 ```C#
