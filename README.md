@@ -192,7 +192,7 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
 
 ```
 
-### Sending a Fax with Timezone
+### Assigning a Timezone in the request:
 The Timezone will be used to format the datetime in the fax header, a request similar to the following example below.
 
 ```C#
