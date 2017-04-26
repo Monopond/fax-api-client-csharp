@@ -119,7 +119,7 @@ To set-up a fax to have retries a request similar to the following example can b
 ```
 
 ### Sending a fax with Retries in SendFaxRequest:
-To assign a `Retries` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `”RetriesSpecified”` to `true` in order to take effect the value of selected `Retries` in the request. If the `apiFaxmessage` contains `Retries`, it will override the `Retries` value in `sendFaxRequest`.
+To assign a `Retries` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `”RetriesSpecified”` to `true` in order to take effect the value of selected `Retries` in the request. If the `apiFaxmessage` contains `Retries`, it will used as default`Retries` value for fax transmission`.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -191,7 +191,7 @@ To set-up a fax to have BusyRetries a request similar to the following example c
 ```
 
 ### Sending a fax with BusyRetries in SendFaxRequest:
-To assign a `BusyRetries` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `BusyRetriesSpecified` to `true` in order to take effect the value of selected `BusyRetries` in the request. If the `apiFaxmessage` contains `BusyRetries`, it will override the `BusyRetries` value in `sendFaxRequest`.
+To assign a `BusyRetries` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `BusyRetriesSpecified` to `true` in order to take effect the value of selected `BusyRetries` in the request. If the `apiFaxmessage` contains `BusyRetries`, it will be used as default `BusyRetries` value for fax transmission.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -264,7 +264,7 @@ To assign a fax to have a `Resolution` in the request similar to the following e
 ```
 
 ### Sending a Fax with Resolution in SendFaxRequest:
-To assign a `Resolution` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request. If the `apiFaxmessage` contains `Resolution`, it will override the `Resolution` value in `sendFaxRequest`.
+To assign a `Resolution` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request. If the `apiFaxmessage` contains `Resolution`, it will be used as default `Resolution` value for fax.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -374,7 +374,7 @@ The Timezone will be used to format the datetime display in the fax header, a re
 ```
 
 ### Sending a Fax with TimeZone in SendFaxRequest:
-To assign a `TimeZone` in the sendFaxRequest, the request should be similar to the following example below. If the `apiFaxmessage` contains `TimeZone`, it will override the `TimeZone` value in `sendFaxRequest`.
+To assign a `TimeZone` in the sendFaxRequest, the request should be similar to the following example below. If the `apiFaxmessage` contains `TimeZone`, it will be used as default `TimeZone` of fax.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
