@@ -193,7 +193,7 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
 ```
 
 ### Assigning a Timezone in the request:
-The Timezone will be used to format the datetime in the fax header, a request similar to the following example below.
+The Timezone will be used to format the datetime display in the fax header, a request similar to the following example below.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -212,7 +212,7 @@ The Timezone will be used to format the datetime in the fax header, a request si
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
             apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.TimeZone = "UTC";
+            apiFaxMessage1.TimeZone = "Australia/Adelaide<";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -227,6 +227,71 @@ The Timezone will be used to format the datetime in the fax header, a request si
         }
 
 ```
+
+### Assigning a HeaderFormat in the request:
+Determines the format of the header line that is printed on the top of the transmitted fax message, a request similar to the following example below.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.HeaderFormat = "From %from%, To %to%|%a %b %d %H:%M %Y";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+This is the sample output of fax header using the header format above in the request:
+```
+      From TSID, To 61022221234 Wed Apr 26 09:33 2017
+```
+
+These are the values that you can use to form a header format:
+
+**Value** | **Description**
+--- | ---
+**%from%**|The value of the **SendFrom** field in the message.
+**%to%**|The value of the **SendTo** field in the message.
+**%a**|Weekday name (abbreviated)
+**%A**|Weekday name
+**%b**|Month name (abbreviated)
+**%B**|Month name
+**%d**|Day of the month as a decimal (01 – 31)
+**%m**|Month as a decimal (01 – 12)
+**%y**|Year as a decimal (abbreviated)
+**%Y**|Year as a decimal
+**%H**|Hour as a decimal using a 24-hour clock (00 – 23)
+**%I**|Hour as a decimal using a 12-hour clock (01 – 12)
+**%M**|Minute as a decimal (00 – 59)
+**%S**|Second as a decimal (00 – 59)
+**%p**|AM or PM
+**%j**|Day of the year as a decimal (001 – 366)
+**%U**|Week of the year as a decimal (Monday as first day of the week) (00 – 53)
+**%W**|Day of the year as a decimal (001 – 366)
+**%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
+**%%**|A literal % character
+
 
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
