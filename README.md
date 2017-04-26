@@ -300,7 +300,7 @@ To assign a `Resolution` in the sendFaxRequest, the request should be similar to
 
 ```
 
-### Sending a Fax with FaxDitheringTechnique:
+### Sending a Fax with FaxDitheringTechnique in ApiFaxDocument:
 To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
 
 ```C#
@@ -337,7 +337,7 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
 
 ```
 
-### Assigning a Timezone in the request:
+### Assigning a Timezone in ApiFaxMessage1:
 The Timezone will be used to format the datetime display in the fax header, a request similar to the following example below.
 
 ```C#
@@ -357,7 +357,7 @@ The Timezone will be used to format the datetime display in the fax header, a re
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
             apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.TimeZone = "Australia/Adelaide<";
+            apiFaxMessage1.TimeZone = "Australia/Adelaide";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -365,6 +365,42 @@ The Timezone will be used to format the datetime display in the fax header, a re
 
             //create a new instance of sendFax request.
             sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
+```
+
+### Sending a Fax with TimeZone in SendFaxRequest:
+To assign a `TimeZone` in the sendFaxRequest, the request should be similar to the following example below. If the `apiFaxmessage` contains `TimeZone`, it will override the `TimeZone` value in `sendFaxRequest`.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.TimeZone = "Australia/Adelaide";
             sendFaxRequest.FaxMessages = apiFaxMessages;
 
             // call the sendFax method.
