@@ -82,7 +82,7 @@ To send a fax to a single destination a request similar to the following example
 
 ```
 
-### Sending a fax with retries:
+### Sending a fax with Retries:
 To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
          private static void sendFaxSample(ApiService apiClient)
