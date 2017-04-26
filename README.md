@@ -509,48 +509,6 @@ These are the parameters that you can use to form a header format:
 **%%**|A literal % character
 
 
-### Sending multiple faxes:
-To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
-```C#
-        private static void sendFaxSample(ApiService apiClient)
-        {
-            // create a new fax document.
-            apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
-            apiFaxDocument.FileName = "test.txt";
-
-            // create an array of api fax documents.
-            apiFaxDocument[] apiFaxDocuments;
-            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
-
-            //create a new fax message.
-            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
-            apiFaxMessage1.MessageRef = "test-1-1-1";
-            apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.Resolution = faxResolution.normal;
-            apiFaxMessage1.Documents = apiFaxDocuments;
-
-            // create another fax message.
-            apiFaxMessage apiFaxMessage2 = new apiFaxMessage();
-            apiFaxMessage2.MessageRef = "test-1-1-1";
-            apiFaxMessage2.SendTo = "6011111111";
-            apiFaxMessage2.SendFrom = "Test fax";
-            apiFaxMessage2.Resolution = faxResolution.normal;
-            apiFaxMessage2.Documents = apiFaxDocuments;
-
-            // create an array of api fax messages.
-            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[2] { apiFaxMessage1, apiFaxMessage2 };
-
-            //create a new instance of sendFax request.
-            sendFaxRequest sendFaxRequest = new sendFaxRequest();
-            sendFaxRequest.FaxMessages = apiFaxMessages;
-
-            // call the sendFax method.
-            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
-        }
-```
-
 ### Assigning CLI in ApiFaxMessage:
 Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following example below.
 
@@ -586,9 +544,8 @@ Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following exa
         }
 ```
 
-
 ### Assigning CLI in SendFaxRequest:
-Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following example below. If the `apiFaxMessage` contains `CLI`, it will be default `CLI` value of fax.
+Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following example below. If the `apiFaxMessage` contains `CLI`, it will be default `CLI` value of
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -612,6 +569,48 @@ Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following ex
 
             // create an array of api fax messages.
             apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+### Sending multiple faxes:
+To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
+```C#
+        private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Resolution = faxResolution.normal;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create another fax message.
+            apiFaxMessage apiFaxMessage2 = new apiFaxMessage();
+            apiFaxMessage2.MessageRef = "test-1-1-1";
+            apiFaxMessage2.SendTo = "6011111111";
+            apiFaxMessage2.SendFrom = "Test fax";
+            apiFaxMessage2.Resolution = faxResolution.normal;
+            apiFaxMessage2.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[2] { apiFaxMessage1, apiFaxMessage2 };
 
             //create a new instance of sendFax request.
             sendFaxRequest sendFaxRequest = new sendFaxRequest();
