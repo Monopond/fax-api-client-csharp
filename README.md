@@ -118,6 +118,42 @@ To set-up a fax to have retries a request similar to the following example can b
             
 ```
 
+### Sending a fax with BusyRetries:
+To set-up a fax to have BusyRetries a request similar to the following example can be used. Please note the addition of BusyRetriesSpecified and BusyRetries" , if BusyRetriesSpecified is not supplied or initialized, it will have false value as default and BusyRetries" will be ignored.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.BusyRetriesSpecified = true;
+            apiFaxMessage1.BusyRetries = 2;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+            
+```
+
 ### Sending a Fax with Resolution:
 To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
