@@ -292,6 +292,7 @@ These are the values that you can use to form a header format:
 **%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
 **%%**|A literal % character
 
+```
 
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
