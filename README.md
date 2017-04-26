@@ -119,7 +119,7 @@ To set-up a fax to have retries a request similar to the following example can b
 ```
 
 ### Sending a fax with Retries in sendFaxRequest:
-Adding retries in sendFaxRequest, it will be used as default retries value of all apiFaxMessages but if an apiFaxMessage has a retries it will immediately override the retries value from sendFaxRequest. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
+The retries value in SendFaxRequest will be use a default retries value of all apiFaxMessages but if an apiFaxMessage has set already a retries value it will immediately override the retries value from sendFaxRequest. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
