@@ -409,8 +409,8 @@ To assign a `TimeZone` in the sendFaxRequest, the request should be similar to t
 
 ```
 
-### Assigning a HeaderFormat in the request:
-Determines the format of the header line that is printed on the top of the transmitted fax message, a request similar to the following example below.
+### Assigning a HeaderFormat in ApiFaxMessage:
+Allows the header format that appears at the top of the transmitted fax to be changed, a request similar to the following example below.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -446,6 +446,41 @@ Determines the format of the header line that is printed on the top of the trans
 This is the sample output of fax header using the header format above in the request:
 ```
       From TSID, To 61022221234 Wed Apr 26 09:33 2017 1 of 1
+```
+
+### Assigning a HeaderFormat in SendFaxRequest:
+To assign a `HeaderFormat` in the sendFaxRequest, the request should be similar to the following example below. If the `apiFaxmessage` contains `HeaderFormat`, it will be used as default `HeaderFormat` of fax.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.HeaderFormat = "From %from%, To %to%|%a %b %d %H:%M %Y";
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
 ```
 
 These are the parameters that you can use to form a header format:
