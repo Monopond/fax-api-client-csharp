@@ -265,7 +265,7 @@ Determines the format of the header line that is printed on the top of the trans
 This is the sample output of fax header using the header format above in the request:
 ```
       From TSID, To 61022221234 Wed Apr 26 09:33 2017
-````
+```
 
 These are the parameters that you can use to form a header format:
 
@@ -291,8 +291,6 @@ These are the parameters that you can use to form a header format:
 **%W**|Day of the year as a decimal (001 – 366)
 **%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
 **%%**|A literal % character
-
-````
 
 
 ### Sending multiple faxes:
