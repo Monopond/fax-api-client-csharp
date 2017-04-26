@@ -337,7 +337,7 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
 
 ```
 
-### Assigning a Timezone in ApiFaxMessage1:
+### Assigning a Timezone in ApiFaxMessage:
 The Timezone will be used to format the datetime display in the fax header, a request similar to the following example below.
 
 ```C#
