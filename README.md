@@ -82,7 +82,7 @@ To send a fax to a single destination a request similar to the following example
 
 ```
 
-### Sending a fax with Retries in apiFaxMessage:
+### Sending a fax with Retries in ApiFaxMessage:
 To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -118,7 +118,7 @@ To set-up a fax to have retries a request similar to the following example can b
             
 ```
 
-### Sending a fax with Retries in sendFaxRequest:
+### Sending a fax with Retries in SendFaxRequest:
 The retries value in SendFaxRequest will be use a default retries value of all apiFaxMessages but if an apiFaxMessage has set already a retries value it will immediately override the retries value from sendFaxRequest. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -154,7 +154,7 @@ The retries value in SendFaxRequest will be use a default retries value of all a
             
 ```
 
-### Sending a fax with BusyRetries:
+### Sending a fax with BusyRetries in ApiFaxMessage:
 To set-up a fax to have BusyRetries a request similar to the following example can be used. Please note the addition of BusyRetriesSpecified and BusyRetries" , if BusyRetriesSpecified is not supplied or initialized, it will have false value as default and BusyRetries" will be ignored.
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -186,8 +186,43 @@ To set-up a fax to have BusyRetries a request similar to the following example c
 
             // call the sendFax method.
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
-        }
-            
+        }     
+```
+
+### Sending a fax with BusyRetries in SendFaxRequest:
+Adding a BusyRetries in sendFaxRequest will be used as the default BusyRetries of all apiFaxMessages but if an apiFaxMessage has a BusyRetries then it will override the BusyRetries value in sendFaxRequest. Please note the addition of BusyRetriesSpecified and BusyRetries" , if BusyRetriesSpecified is not supplied or initialized, it will have false value as default and BusyRetries" will be ignored.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.BusyRetriesSpecified = true;
+            sendFaxRequest.BusyRetries = 2;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }     
 ```
 
 ### Sending a Fax with Resolution:
