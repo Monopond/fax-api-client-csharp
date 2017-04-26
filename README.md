@@ -165,8 +165,8 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
             apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
             apiFaxDocument.FileName = "test.txt";
-            apiFaxDocument.DitheringTechnique = faxDitheringTechnique.DETAILED;
             apiFaxDocument.DitheringTechniqueSpecified = true;
+            apiFaxDocument.DitheringTechnique = faxDitheringTechnique.DETAILED;
 
             // create an array of api fax documents.
             apiFaxDocument[] apiFaxDocuments;
@@ -177,8 +177,6 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
             apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.Resolution = faxResolution.fine;
-            apiFaxMessage1.ResolutionSpecified = true;
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
