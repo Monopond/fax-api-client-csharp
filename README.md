@@ -20,7 +20,7 @@ In the project folder, a file called `Program.cs` is provided to show you severa
 
 Create a new instance of the ApiService. This service needs a WSDL, your username and your password. We have two environments for the wsdl, so choose one that is appropriate for you: 
 
-Test WSDL: https://test.api.monopond.com/fax/soap/v2.1/?wsdl
+Test WSDL: http://test.api.monopond.com/fax/soap/v2.1/?wsdl
 
 Production WSDL: https://api.monopond.com/fax/soap/v2.1/?wsdl
 
@@ -28,7 +28,7 @@ Production WSDL: https://api.monopond.com/fax/soap/v2.1/?wsdl
 ```C#
 //Define WSDL URLs
 static String PRODUCTION_URL = "https://api.monopond.com/fax/soap/v2.1/";
-static String TEST_URL = "https://test.api.monopond.com/fax/soap/v2.1/";
+static String TEST_URL = "http://test.api.monopond.com/fax/soap/v2.1/";
 
 // TODO: change user credentials
 string username = "username";
