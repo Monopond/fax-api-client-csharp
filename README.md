@@ -545,7 +545,7 @@ Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following exa
 ```
 
 ### Assigning CLI in SendFaxRequest:
-Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following example below. If the `apiFaxMessage` contains `CLI`, it will be default `CLI` value of
+Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following example below. If the `apiFaxMessage` contains `CLI`, it will be the default `CLI` value of fax.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
