@@ -263,6 +263,13 @@ To assign a fax to have a `Resolution` in the request similar to the following e
 
 ```
 
+**Types of Resolution:**
+
+| **Value** | **Description** |
+| --- | --- |
+| **normal** | Normal standard resolution (98 scan lines per inch) |
+| **fine** | Fine resolution (196 scan lines per inch) |
+
 ### Sending a Fax with Resolution in SendFaxRequest:
 To assign a `Resolution` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request. If the `apiFaxmessage` contains `Resolution`, it will be used as default `Resolution` value for fax.
 
@@ -1216,23 +1223,23 @@ private static void stopFaxSample(ApiService apiClient)
 ```
 
 
-###Response
+### Response
 The response received from a `StopFaxRequest` is the same response you would receive when calling the `FaxStatus` method call with the `send` verbosity level.
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults [here](#section5).
-##PauseFax
+## PauseFax
 
-###Description
+### Description
 Pauses a fax message before it starts transmitting. This fax message must either be queued, starting or sending. Please note the fax cannot be paused if the message is currently being transmitted to the destination device.
 
 When making a pause request, you must provide at least a `BroadcastRef`, `SendRef` or `MessageRef`. The function will also accept a combination of these to further narrow down the request. 
 
-###Request
-####PauseFaxRequest Properties:
+### Request
+#### PauseFaxRequest Properties:
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
 | **BroadcastRef** | | *String* | User-defined broadcast reference. |
@@ -1240,7 +1247,7 @@ When making a pause request, you must provide at least a `BroadcastRef`, `SendRe
 | **MessageRef** | | *String* | User-defined message reference. |
 
 
-###PauseFax Request limiting by BroadcastRef:
+### PauseFax Request limiting by BroadcastRef:
 ```C#
 private static void pauseFaxSample(ApiService apiClient)
         {
@@ -1253,7 +1260,7 @@ private static void pauseFaxSample(ApiService apiClient)
         }
 ```
 
-###PauseFax Request limiting by SendRef:
+### PauseFax Request limiting by SendRef:
 ```C#
 private static void pauseFaxSample(ApiService apiClient)
         {
@@ -1265,7 +1272,7 @@ private static void pauseFaxSample(ApiService apiClient)
             pauseFaxResponse pauseFaxResponse = apiClient.PauseFax(pauseFaxRequest);
         }
 ```
-###PauseFax Request limiting by MessageRef:
+### PauseFax Request limiting by MessageRef:
 ```C#
 private static void pauseFaxSample(ApiService apiClient)
         {
@@ -1278,27 +1285,27 @@ private static void pauseFaxSample(ApiService apiClient)
         }
 ```
 
-###Response
+### Response
 The response received from a `PauseFaxRequest` is the same response you would receive when calling the `FaxStatus` method call with the `send` verbosity level. 
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults in [here](#section5).
 
-##ResumeFax
+## ResumeFax
 
 When making a resume request, you must provide at least a `BroadcastRef`, `SendRef` or `MessageRef`. The function will also accept a combination of these to further narrow down the request. 
 
-###Request
-####ResumeFaxRequest Properties:
+### Request
+#### ResumeFaxRequest Properties:
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
 | **BroadcastRef** | | *String* | User-defined broadcast reference. |
 | **SendRef** | | *String* | User-defined send reference. |
 | **MessageRef** | | *String* | User-defined message reference. |
 
-###ResumeFax Request limiting by BroadcastRef:
+### ResumeFax Request limiting by BroadcastRef:
 ```C#
 private static void resumeFaxSample(ApiService apiClient)
         {
@@ -1310,7 +1317,7 @@ private static void resumeFaxSample(ApiService apiClient)
             resumeFaxResponse resumeFaxResponse = apiClient.ResumeFax(resumeFaxRequest);
         }
 ```
-###ResumeFax Request limiting by SendRef:
+### ResumeFax Request limiting by SendRef:
 ```C#
 private static void resumeFaxSample(ApiService apiClient)
         {
@@ -1322,7 +1329,7 @@ private static void resumeFaxSample(ApiService apiClient)
             resumeFaxResponse resumeFaxResponse = apiClient.ResumeFax(resumeFaxRequest);
         }
 ```
-###ResumeFax Request limiting by MessageRef:
+### ResumeFax Request limiting by MessageRef:
 ```C#
 private static void resumeFaxSample(ApiService apiClient)
         {
@@ -1336,20 +1343,20 @@ private static void resumeFaxSample(ApiService apiClient)
 ```
 
 
-###Response
+### Response
 The response received from a `ResumeFaxRequest` is the same response you would receive when calling the `FaxStatus` method call with the `send` verbosity level. 
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults [here](#section5).
 
-##FaxDocumentPreview
-###Description
+## FaxDocumentPreview
+### Description
 
 This function provides you with a method to generate a preview of a saved document at different resolutions with various dithering settings. It returns a tiff data in base64 along with a page count.
 
-###Sample Request
+### Sample Request
 ```c#
 private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient)
         {
@@ -1385,7 +1392,7 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
         }
 ```
 
-###Request
+### Request
 **FaxDocumentPreviewRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** | **Default** |
@@ -1454,7 +1461,7 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
 | **normal** | Normal standard resolution (98 scan lines per inch) |
 | **fine** | Fine resolution (196 scan lines per inch) |
 
-###Response
+### Response
 **FaxDocumentPreviewResponse**
 
 **Name** | **Type** | **Description** 
@@ -1462,17 +1469,17 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
 **TiffPreview** | *String* | A preview version of the document encoded in Base64 format. 
 **NumberOfPages** | *Int* | Total number of pages in the document preview.
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **DocumentRefDoesNotExistException**, **InternalServerException**, **UnsupportedDocumentContentType**, **MergeFieldDoesNotMatchDocumentTypeException**, **UnknownHostException**.
 You can find more details on these faults in Section 5 of this document.You can find more details on these faults in the next section of this document.
 
-##SaveFaxDocument
-###Description
+## SaveFaxDocument
+### Description
 
 This function allows you to upload a document and save it under a document reference (DocumentRef) for later use. (Note: These saved documents only last 30 days on the system.)
 
-###Sample Request
+### Sample Request
 
 ```c#
 private static void saveFaxDocumentSample(ApiService apiClient)
@@ -1488,7 +1495,7 @@ private static void saveFaxDocumentSample(ApiService apiClient)
         }
 ```
 
-###Request
+### Request
 **SaveFaxDocumentRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** |
@@ -1497,17 +1504,17 @@ private static void saveFaxDocumentSample(ApiService apiClient)
 |**FileName**| **X** | *String* | The document filename including extension. This is important as it is used to help identify the document MIME type. |
 | **FileData**|**X**| *Base64* |The document encoded in Base64 format.| |
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **DocumentRefAlreadyExistsException**, **DocumentContentTypeNotFoundException**, **InternalServerException**.
 You can find more details on these faults in Section 5 of this document.You can find more details on these faults in the next section of this document.
 
-##DeleteFaxDocument
-###Description
+## DeleteFaxDocument
+### Description
 
 This function removes a saved fax document from the system.
 
-###Sample Request
+### Sample Request
 ```C#
 private static void deleteFaxSample(ApiService apiClient)
         {
@@ -1520,40 +1527,40 @@ private static void deleteFaxSample(ApiService apiClient)
         }
 ```
 
-###Request
+### Request
 **DeleteFaxDocumentRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** |
 |--- | --- | --- | --- | ---|
 |**DocumentRef**| **X** | *String* | Unique identifier for the document to be deleted. |
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **DocumentRefDoesNotExistException**, **InternalServerException**.
 You can find more details on these faults in Section 5 of this document.You can find more details on these faults in the next section of this document.
 
 <a name="section5"></a> 
-#More Information
-##Exceptions/SOAP Faults
+# More Information
+## Exceptions/SOAP Faults
 If an error occurs during a request on the Monopond Fax API the service will throw a SOAP fault or exception. Each exception is listed in detail below. 
-###InvalidArgumentsException
+### InvalidArgumentsException
 One or more of the arguments passed in the request were invalid. Each element that failed validation is included in the fault details along with the reason for failure.
-###DocumentContentTypeNotFoundException
+### DocumentContentTypeNotFoundException
 There was an error while decoding the document provided; we were unable to determine its content type.
-###DocumentRefAlreadyExistsException
+###D ocumentRefAlreadyExistsException
 There is already a document on your account with this DocumentRef.
-###DocumentContentTypeNotFoundException
+### DocumentContentTypeNotFoundException
 Content type could not be found for the document.
-###NoMessagesFoundException
+### NoMessagesFoundException
 Based on the references sent in the request no messages could be found that match the criteria.
-###InternalServerException
+### InternalServerException
 An unusual error occurred on the platform. If this error occurs please contact support for further instruction.
 
-##General Properties and File Formatting
-###File Encoding
+## General Properties and File Formatting
+### File Encoding
 All files are encoded in the Base64 encoding specified in RFC 2045 - MIME (Multipurpose Internet Mail Extensions). The Base64 encoding is designed to represent arbitrary sequences of octets in a form that need not be humanly readable. A 65-character subset ([A-Za-z0-9+/=]) of US-ASCII is used, enabling 6 bits to be represented per printable character. For more information see http://tools.ietf.org/html/rfc2045 and http://en.wikipedia.org/wiki/Base64
 
-###Dates
+### Dates
 Dates are always passed in ISO-8601 format with time zone. For example: “2012-07-17T19:27:23+08:00”
 
 ## List of Supported font names for StampMergeField TextValue
