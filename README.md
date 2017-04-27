@@ -310,6 +310,21 @@ To assign a `Resolution` in the sendFaxRequest, the request should be similar to
 ### Sending a Fax with FaxDitheringTechnique in ApiFaxDocument:
 To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
 
+**Types of FaxDitheringTechnique:**
+
+| Value | Fax Dithering Technique |
+| --- | --- |
+| **none** | No dithering. |
+| **normal** | Normal dithering.|
+| **turbo** | Turbo dithering.|
+| **darken** | Darken dithering.|
+| **darken_more** | Darken more dithering.|
+| **darken_extra** | Darken extra dithering.|
+| **lighten** | Lighten dithering.|
+| **lighten_more** | Lighten more dithering. |
+| **crosshatch** | Crosshatch dithering. |
+| **DETAILED** | Detailed dithering. |
+
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
@@ -1439,20 +1454,6 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
 |**fileName** |  | *String* | The document filename including extension. This is important as it is used to help identify the document MIME type. |
 |**fileData** |  | *Base64* | The document encoded in Base64 format. |
 
-**FaxDitheringTechnique:**
-
-| Value | Fax Dithering Technique |
-| --- | --- |
-| **none** | No dithering. |
-| **normal** | Normal dithering.|
-| **turbo** | Turbo dithering.|
-| **darken** | Darken dithering.|
-| **darken_more** | Darken more dithering.|
-| **darken_extra** | Darken extra dithering.|
-| **lighten** | Lighten dithering.|
-| **lighten_more** | Lighten more dithering. |
-| **crosshatch** | Crosshatch dithering. |
-| **DETAILED** | Detailed dithering. |
 
 **Resolution Levels:**
 
