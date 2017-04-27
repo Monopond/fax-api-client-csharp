@@ -229,6 +229,13 @@ To assign a `BusyRetries` in the sendFaxRequest, the request should be similar t
 ### Sending a Fax with Resolution in ApiFaxMessage:
 To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
+**Types of Resolution:**
+
+| **Value** | **Description** |
+| --- | --- |
+| **normal** | Normal standard resolution (98 scan lines per inch) |
+| **fine** | Fine resolution (196 scan lines per inch) |
+
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
@@ -262,13 +269,6 @@ To assign a fax to have a `Resolution` in the request similar to the following e
         }
 
 ```
-
-**Types of Resolution:**
-
-| **Value** | **Description** |
-| --- | --- |
-| **normal** | Normal standard resolution (98 scan lines per inch) |
-| **fine** | Fine resolution (196 scan lines per inch) |
 
 ### Sending a Fax with Resolution in SendFaxRequest:
 To assign a `Resolution` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request. If the `apiFaxmessage` contains `Resolution`, it will be used as default `Resolution` value for fax.
