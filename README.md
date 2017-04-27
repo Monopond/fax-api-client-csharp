@@ -434,6 +434,32 @@ To assign a `TimeZone` in the sendFaxRequest, the request should be similar to t
 ### Assigning a HeaderFormat in ApiFaxMessage:
 Allows the header format that appears at the top of the transmitted fax to be changed, a request similar to the following example below.
 
+
+These are the parameters that you can use to form a header format:
+
+**Value** | **Description**
+--- | ---
+**%from%**|The value of the **SendFrom** field in the message.
+**%to%**|The value of the **SendTo** field in the message.
+**%a**|Weekday name (abbreviated)
+**%A**|Weekday name
+**%b**|Month name (abbreviated)
+**%B**|Month name
+**%d**|Day of the month as a decimal (01 – 31)
+**%m**|Month as a decimal (01 – 12)
+**%y**|Year as a decimal (abbreviated)
+**%Y**|Year as a decimal
+**%H**|Hour as a decimal using a 24-hour clock (00 – 23)
+**%I**|Hour as a decimal using a 12-hour clock (01 – 12)
+**%M**|Minute as a decimal (00 – 59)
+**%S**|Second as a decimal (00 – 59)
+**%p**|AM or PM
+**%j**|Day of the year as a decimal (001 – 366)
+**%U**|Week of the year as a decimal (Monday as first day of the week) (00 – 53)
+**%W**|Day of the year as a decimal (001 – 366)
+**%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
+**%%**|A literal % character
+
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
@@ -504,32 +530,6 @@ To assign a `HeaderFormat` in the sendFaxRequest, the request should be similar 
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
-
-These are the parameters that you can use to form a header format:
-
-**Value** | **Description**
---- | ---
-**%from%**|The value of the **SendFrom** field in the message.
-**%to%**|The value of the **SendTo** field in the message.
-**%a**|Weekday name (abbreviated)
-**%A**|Weekday name
-**%b**|Month name (abbreviated)
-**%B**|Month name
-**%d**|Day of the month as a decimal (01 – 31)
-**%m**|Month as a decimal (01 – 12)
-**%y**|Year as a decimal (abbreviated)
-**%Y**|Year as a decimal
-**%H**|Hour as a decimal using a 24-hour clock (00 – 23)
-**%I**|Hour as a decimal using a 12-hour clock (01 – 12)
-**%M**|Minute as a decimal (00 – 59)
-**%S**|Second as a decimal (00 – 59)
-**%p**|AM or PM
-**%j**|Day of the year as a decimal (001 – 366)
-**%U**|Week of the year as a decimal (Monday as first day of the week) (00 – 53)
-**%W**|Day of the year as a decimal (001 – 366)
-**%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
-**%%**|A literal % character
-
 
 ### Assigning CLI in ApiFaxMessage:
 Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following example below.
