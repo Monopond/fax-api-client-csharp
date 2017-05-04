@@ -66,7 +66,6 @@ To send a single fax to a fax number or destination a request similar to the fol
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
