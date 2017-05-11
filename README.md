@@ -630,6 +630,18 @@ To know more about SendFrom you can check it in these following resources:
 * [ApiFaxMessage Properties](#apifaxmessage-properties)
 * [SendFaxRequest Properties](#sendfaxrequest-properties)
 
+### Sending a Fax with DNCR enabled in ApiFaxMessage
+
+### Sending a Fax with FPS enabled in ApiFaxMessage
+
+### Sending a Fax with Smartblock enabled in ApiFaxMessage
+
+### Sending a Fax with DNCR enabled in SendFaxRequest
+
+### Sending a Fax with FPS enabled in SendFaxRequest
+
+### Sending a Fax with Smartblock enabled in SendFaxRequest
+
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
 ```C#
