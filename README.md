@@ -307,23 +307,10 @@ To assign a `Resolution` in the sendFaxRequest, the request should be similar to
 
 ```
 
+You can visit [here](#resolution-types) the different types of Resolutions.
+
 ### Sending a Fax with FaxDitheringTechnique in ApiFaxDocument:
 To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
-
-**Types of FaxDitheringTechnique:**
-
-| Value | Fax Dithering Technique |
-| --- | --- |
-| **none** | No dithering. |
-| **normal** | Normal dithering.|
-| **turbo** | Turbo dithering.|
-| **darken** | Darken dithering.|
-| **darken_more** | Darken more dithering.|
-| **darken_extra** | Darken extra dithering.|
-| **lighten** | Lighten dithering.|
-| **lighten_more** | Lighten more dithering. |
-| **crosshatch** | Crosshatch dithering. |
-| **DETAILED** | Detailed dithering. |
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -358,6 +345,8 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
         }
 
 ```
+
+You can visit [here](#faxditheringtechnique) the different types of FaxDitheringTechnique.
 
 ### Assigning a Timezone in ApiFaxMessage:
 The Timezone will be used to format the datetime display in the fax header, a request similar to the following example below.
@@ -1400,13 +1389,6 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
 |**fileData** |  | *Base64* | The document encoded in Base64 format. |
 
 
-**Resolution Levels:**
-
-| **Value** | **Description** |
-| --- | --- |
-| **normal** | Normal standard resolution (98 scan lines per inch) |
-| **fine** | Fine resolution (196 scan lines per inch) |
-
 ### Response
 **FaxDocumentPreviewResponse**
 
@@ -1684,3 +1666,18 @@ This represents a single fax message being sent to a destination.
 | --- | --- |
 | **normal** | Normal standard resolution (98 scan lines per inch) |
 | **fine** | Fine resolution (196 scan lines per inch) |
+
+### FaxDitheringTechnique
+
+| Value | Fax Dithering Technique |
+| --- | --- |
+| **none** | No dithering. |
+| **normal** | Normal dithering.|
+| **turbo** | Turbo dithering.|
+| **darken** | Darken dithering.|
+| **darken_more** | Darken more dithering.|
+| **darken_extra** | Darken extra dithering.|
+| **lighten** | Lighten dithering.|
+| **lighten_more** | Lighten more dithering. |
+| **crosshatch** | Crosshatch dithering. |
+| **DETAILED** | Detailed dithering. |
