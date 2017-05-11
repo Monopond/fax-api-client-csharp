@@ -668,7 +668,7 @@ To send fax with DNCR in apiFaxMessage, you need to set "dncrSpecified" to true 
         }
 ```
 To know more about DNCR you can check it in this following resource:
-* [Blocklist Parameters](#blocklist-parameters)
+* [Blocklists Parameters](#blocklists-parameters)
 
 ### Sending a Fax with DNCR enabled in SendFaxRequest
 To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
@@ -708,7 +708,7 @@ To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true
         }
 ```
 To know more about DNCR you can check it in this following resource:
-* [Blocklist Parameters](#blocklist-parameters)
+* [Blocklists Parameters](#blocklists-parameters)
 
 ### Sending a Fax with FPS enabled in ApiFaxMessage
 To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
@@ -747,7 +747,7 @@ To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in
         }
 ```
 To know more about FPS you can check it in this following resource:
-* [Blocklist Parameters](#blocklist-parameters)
+* [Blocklists Parameters](#blocklists-parameters)
 
 ### Sending a Fax with FPS enabled in SendFaxRequest
 To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
@@ -786,7 +786,7 @@ To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true i
         }
 ```
 To know more about FPS you can check it in this following resource:
-* [Blocklist Parameters](#blocklist-parameters)
+* [Blocklists Parameters](#blocklists-parameters)
 
 ### Sending a Fax with Smartblock enabled in ApiFaxMessage
 To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
@@ -825,7 +825,7 @@ To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecifi
         }
 ```
 To know more about Smartblock you can check it in this following resource:
-* [Blocklist Parameters](#blocklist-parameters)
+* [Blocklists Parameters](#blocklists-parameters)
 
 ### Sending a Fax with Smartblock enabled in SendFaxRequest
 To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
@@ -864,7 +864,7 @@ To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecif
         }
 ```
 To know more about Smartblock you can check it in this following resource:
-* [Blocklist Parameters](#blocklist-parameters)
+* [Blocklists Parameters](#blocklists-parameters)
 
 ### Sending a Fax with ScheduledStartTime in ApiFaxMessage
 To set a ScheduledStartTime for ApiFaxMessage, a request must similar to the following example below can be used.
