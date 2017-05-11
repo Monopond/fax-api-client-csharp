@@ -234,13 +234,6 @@ To assign a `BusyRetries` in the sendFaxRequest, the request should be similar t
 ### Sending a Fax with Resolution in ApiFaxMessage:
 To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
-**Types of Resolution:**
-
-| **Value** | **Description** |
-| --- | --- |
-| **normal** | Normal standard resolution (98 scan lines per inch) |
-| **fine** | Fine resolution (196 scan lines per inch) |
-
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
@@ -274,6 +267,8 @@ To assign a fax to have a `Resolution` in the request similar to the following e
         }
 
 ```
+
+You can visit [here](#resolution-types) the different types of Resolutions.
 
 ### Sending a Fax with Resolution in SendFaxRequest:
 To assign a `Resolution` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request. If the `apiFaxmessage` contains `Resolution`, it will be used as default `Resolution` value for fax.
@@ -855,13 +850,6 @@ private static void sendFaxSample_stampMergeData_TextAndImageStamp(ApiService ap
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
-
-***Resolution Levels:***
-
-| **Value** | **Description** |
-| --- | --- |
-| **normal** | Normal standard resolution (98 scan lines per inch) |
-| **fine** | Fine resolution (196 scan lines per inch) |
 
 ***Header Format:iff***
 Determines the format of the header line that is printed on the top of the transmitted fax message.
@@ -1688,3 +1676,11 @@ This represents a single fax message being sent to a destination.
 **MustBeSentBeforeDate** | | DateTime |  Specifies a time the fax must be delivered by. Once the specified time is reached the fax will be cancelled across the system. | 
 **MaxFaxPages** | | Unsigned Integer |  Sets a limit on the amount of pages allowed in a single fax transmission. Especially useful if the user is blindly submitting their customer's documents to the platform. | 20
 **CLI**| | String| Allows a customer called ID. Note: Must be enabled on the account before it can be used.
+
+
+### Resolution Types
+
+| **Value** | **Description** |
+| --- | --- |
+| **normal** | Normal standard resolution (98 scan lines per inch) |
+| **fine** | Fine resolution (196 scan lines per inch) |
