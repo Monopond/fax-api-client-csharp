@@ -1628,7 +1628,7 @@ This represents a single fax message being sent to a destination.
 | **DETAILED** | Detailed dithering. |
 
 
-### Header Format
+### HeaderFormat
 
 Determines the format of the header line that is printed on the top of the transmitted fax message.
 This is set to **rom %from%, To %to%|%a %b %d %H:%M %Y”**y default which produces the following:
