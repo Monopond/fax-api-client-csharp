@@ -1395,7 +1395,7 @@ There are multiple levels of verbosity available in the request; these are expla
 **FaxStatusRequest Properties:**
 
 | **Name** | **Required** | **Type** | **Description** |
-|--- | --- | --- | --- | ---|
+|--- | --- | --- | --- | 
 |**BroadcastRef**|  | *String* | User-defined broadcast reference. |
 |**SendRef**|  | *String* | User-defined send reference. |
 |**MessageRef**|  | *String* | User-defined message reference.|
