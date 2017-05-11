@@ -105,7 +105,6 @@ To set-up a fax to have retries a request similar to the following example can b
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.RetriesSpecified = true;
             apiFaxMessage1.Retries = 2;
             apiFaxMessage1.Documents = apiFaxDocuments;
@@ -142,7 +141,6 @@ To assign a `Retries` in the sendFaxRequest, the request should be similar to th
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -178,7 +176,6 @@ To set-up a fax to have BusyRetries a request similar to the following example c
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.BusyRetriesSpecified = true;
             apiFaxMessage1.BusyRetries = 2;
             apiFaxMessage1.Documents = apiFaxDocuments;
@@ -214,7 +211,6 @@ To assign a `BusyRetries` in the sendFaxRequest, the request should be similar t
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -250,7 +246,6 @@ To assign a fax to have a `Resolution` in the request similar to the following e
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Resolution = faxResolution.fine;
             apiFaxMessage1.ResolutionSpecified = true;
             apiFaxMessage1.Documents = apiFaxDocuments;
@@ -289,7 +284,6 @@ To assign a `Resolution` in the sendFaxRequest, the request should be similar to
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -330,7 +324,6 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -367,7 +360,6 @@ The Timezone will be used to format the datetime display in the fax header, a re
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.TimeZone = "Australia/Adelaide";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
@@ -403,7 +395,6 @@ To assign a `TimeZone` in the sendFaxRequest, the request should be similar to t
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -439,7 +430,6 @@ Allows the header format that appears at the top of the transmitted fax to be ch
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.HeaderFormat = "From %from%, To %to%|%a %b %d %H:%M %Y";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
@@ -480,7 +470,6 @@ To assign a `HeaderFormat` in the sendFaxRequest, the request should be similar 
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -515,7 +504,6 @@ Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following exa
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.CLI = "6011111111";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
@@ -550,7 +538,6 @@ Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following ex
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.CLI = "6011111111";
             apiFaxMessage1.Documents = apiFaxDocuments;
 
@@ -565,6 +552,83 @@ Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following ex
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+
+### Assigning SendFrom in ApiFaxMessage:
+To send fax with SendFrom in apiFaxMessage a request similar to the following example can be used.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+To know more about SendFrom you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+
+### Assigning SendFrom in SendFaxRequest:
+To send fax with SendFrom in sendFaxRequest a request similar to the following example can be used.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.SendFrom = "6011111111";
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+To know more about SendFrom you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
