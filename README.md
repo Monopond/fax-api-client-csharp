@@ -1171,7 +1171,7 @@ private static void sendFaxSample(ApiService apiClient)
 
 When sending multiple faxes in batch it is recommended to group them into requests of around 600 fax messages for optimal performance. If you are sending the same document to multiple destinations it is strongly advised to only attach the document once in the root of the send request rather than attaching a document for each destination.
 
-###Sending Microsoft Documents With DocMergeData:
+### Sending Microsoft Documents With DocMergeData:
 (This request only works in version 2.1(or higher) of the fax-api.)
 
 This request is used to send a Microsoft document with replaceable variables or merge fields. The merge field follows the pattern ```<mf:key>```.  If your key is ```field1```, it should be typed as ```<mf:field1>``` in the document. Note that the key must be unique within the whole document. The screenshots below are examples of what the request does.
