@@ -667,6 +667,9 @@ To send fax with DNCR in apiFaxMessage, you need to set "dncrSpecified" to true 
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about DNCR you can check it in this following resource:
+* [Blocklist Parameters](#blocklist-parameters)
+
 ### Sending a Fax with DNCR enabled in SendFaxRequest
 To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
 
@@ -704,6 +707,8 @@ To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about DNCR you can check it in this following resource:
+* [Blocklist Parameters](#blocklist-parameters)
 
 ### Sending a Fax with FPS enabled in ApiFaxMessage
 To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
@@ -741,6 +746,9 @@ To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about FPS you can check it in this following resource:
+* [Blocklist Parameters](#blocklist-parameters)
+
 ### Sending a Fax with FPS enabled in SendFaxRequest
 To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
 
@@ -777,6 +785,9 @@ To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true i
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about FPS you can check it in this following resource:
+* [Blocklist Parameters](#blocklist-parameters)
+
 ### Sending a Fax with Smartblock enabled in ApiFaxMessage
 To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
 
@@ -813,6 +824,8 @@ To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecifi
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about Smartblock you can check it in this following resource:
+* [Blocklist Parameters](#blocklist-parameters)
 
 ### Sending a Fax with Smartblock enabled in SendFaxRequest
 To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
@@ -850,6 +863,8 @@ To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecif
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about Smartblock you can check it in this following resource:
+* [Blocklist Parameters](#blocklist-parameters)
 
 ### Sending a Fax with ScheduledStartTime in ApiFaxMessage
 To set a ScheduledStartTime for ApiFaxMessage, a request must similar to the following example below can be used.
@@ -882,6 +897,10 @@ To set a ScheduledStartTime for ApiFaxMessage, a request must similar to the fol
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about ScheduledStartTime you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
 ### Sending a Fax with ScheduledStartTime in SendFaxRequest
 To set a ScheduledStartTime for SendFaxRequest, a request must similar to the following example below can be used.
 ```C#
@@ -913,6 +932,10 @@ To set a ScheduledStartTime for SendFaxRequest, a request must similar to the fo
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about ScheduledStartTime you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
 ### Sending a Fax with MustBeSentBeforeDate in ApiFaxMessage
 To set a MustBeSentBeforeDate for ApiFaxMessage, you need to set the value of "MustBeSentBeforeDateSpecified" to true. A request must similar to the following example below can be used.
 ```C#
@@ -945,6 +968,10 @@ To set a MustBeSentBeforeDate for ApiFaxMessage, you need to set the value of "M
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about MustBeSentBeforeDate you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
 ### Sending a Fax with MustBeSentBeforeDate in SendFaxRequest
 To set a MustBeSentBeforeDate for SendFaxRequest, you need to set the value of "MustBeSentBeforeDateSpecified" to true. A request must similar to the following example below can be used.
 ```C#
@@ -977,6 +1004,10 @@ To set a MustBeSentBeforeDate for SendFaxRequest, you need to set the value of "
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about MustBeSentBeforeDate you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
 ### Sending a Fax with MaxFaxPages in ApiFaxMessage
 To set a MaxFaxPages for ApiFaxMessage, you need to set the value of "MaxFaxPagesSpecified" to true. A request must similar to the following example below can be used.
 
@@ -1010,6 +1041,9 @@ To set a MaxFaxPages for ApiFaxMessage, you need to set the value of "MaxFaxPage
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about MaxFaxPages you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 ### Sending a Fax with MaxFaxPages in SendFaxRequest
 To set a MaxFaxPages for SendFaxRequest, you need to set the value of "MaxFaxPagesSpecified" to true. A request must similar to the following example below can be used.
@@ -1044,6 +1078,9 @@ To set a MaxFaxPages for SendFaxRequest, you need to set the value of "MaxFaxPag
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+To know more about MaxFaxPages you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
@@ -2138,3 +2175,11 @@ From TSID, To 61022221234 Mon Aug 28 15:32 2012 1 of 1
 **%%**|A literal % character
 
 TODO: The default value is set to: “From %from%, To %to%|%a %b %d %H:%M %Y”
+
+### Blocklists Parameters
+
+| **Name** | **Required** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **smartblock** | false | boolean | Blocks sending to a number if it has consistently failed in the past. |
+| **fps** | false | boolean | Wash numbers against the fps blocklist. |
+| **dncr** | false | boolean | Wash numbers against the dncr blocklist. |
