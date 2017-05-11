@@ -631,7 +631,7 @@ To know more about SendFrom you can check it in these following resources:
 * [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 ### Sending a Fax with DNCR enabled in ApiFaxMessage
-To send fax with DNCR, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
+To send fax with DNCR in apiFaxMessage, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -646,8 +646,41 @@ To send fax with DNCR, you need to set "dncrSpecified" to true in order to apply
             apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
             
             apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
-	   apiFaxMessageBlocklist.dncrSpecified = true;
-	   apiFaxMessageBlocklist.dncr = true;
+	    apiFaxMessageBlocklist.dncrSpecified = true;
+	    apiFaxMessageBlocklist.dncr = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+	    apiFaxMessage1.Blocklists = apiFaxMessageBlocklist;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+### Sending a Fax with DNCR enabled in SendFaxRequest
+To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
                            
             //create a new fax message.
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
@@ -657,10 +690,14 @@ To send fax with DNCR, you need to set "dncrSpecified" to true in order to apply
 
             // create an array of api fax messages.
             apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
-
+	    
+	    apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+	    apiFaxMessageBlocklist.dncrSpecified = true;
+	    apiFaxMessageBlocklist.dncr = true;
+	    
             //create a new instance of sendFax request.
             sendFaxRequest sendFaxRequest = new sendFaxRequest();
-            sendFaxRequest.SendFrom = "6011111111";
+            sendFaxRequest.Blocklists = apiFaxMessageBlocklist;
             sendFaxRequest.FaxMessages = apiFaxMessages;
 
             // call the sendFax method.
@@ -669,14 +706,150 @@ To send fax with DNCR, you need to set "dncrSpecified" to true in order to apply
 ```
 
 ### Sending a Fax with FPS enabled in ApiFaxMessage
+To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
 
-### Sending a Fax with Smartblock enabled in ApiFaxMessage
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
 
-### Sending a Fax with DNCR enabled in SendFaxRequest
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+	    apiFaxMessageBlocklist.fpsSpecified = true;
+	    apiFaxMessageBlocklist.fps = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+	    apiFaxMessage1.Blocklists = apiFaxMessageBlocklist;
 
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
 ### Sending a Fax with FPS enabled in SendFaxRequest
+To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+	    apiFaxMessageBlocklist.fpsSpecified = true;
+	    apiFaxMessageBlocklist.fps = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.Blocklists = apiFaxMessageBlocklist;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+### Sending a Fax with Smartblock enabled in ApiFaxMessage
+To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+	    apiFaxMessageBlocklist.smartblockSpecified = true;
+	    apiFaxMessageBlocklist.smartblock = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+	    apiFaxMessage1.Blocklists = apiFaxMessageBlocklist;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
 
 ### Sending a Fax with Smartblock enabled in SendFaxRequest
+To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+	    apiFaxMessageBlocklist.smartblockSpecified = true;
+	    apiFaxMessageBlocklist.smartblock = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.Blocklists = apiFaxMessageBlocklist;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
 
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
