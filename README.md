@@ -816,37 +816,6 @@ private static void sendFaxSample_stampMergeData_TextAndImageStamp(ApiService ap
         }
 ```
 
-***Header Format:iff***
-Determines the format of the header line that is printed on the top of the transmitted fax message.
-This is set to **rom %from%, To %to%|%a %b %d %H:%M %Y”**y default which produces the following:
-
-From TSID, To 61022221234 Mon Aug 28 15:32 2012 1 of 1
-
-**Value** | **Description**
---- | ---
-**%from%**|The value of the **SendFrom** field in the message.
-**%to%**|The value of the **SendTo** field in the message.
-**%a**|Weekday name (abbreviated)
-**%A**|Weekday name
-**%b**|Month name (abbreviated)
-**%B**|Month name
-**%d**|Day of the month as a decimal (01 – 31)
-**%m**|Month as a decimal (01 – 12)
-**%y**|Year as a decimal (abbreviated)
-**%Y**|Year as a decimal
-**%H**|Hour as a decimal using a 24-hour clock (00 – 23)
-**%I**|Hour as a decimal using a 12-hour clock (01 – 12)
-**%M**|Minute as a decimal (00 – 59)
-**%S**|Second as a decimal (00 – 59)
-**%p**|AM or PM
-**%j**|Day of the year as a decimal (001 – 366)
-**%U**|Week of the year as a decimal (Monday as first day of the week) (00 – 53)
-**%W**|Day of the year as a decimal (001 – 366)
-**%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
-**%%**|A literal % character
-
-TODO: The default value is set to: “From %from%, To %to%|%a %b %d %H:%M %Y”
-
 <a name="docMergeDataParameters"></a> 
 
 **DocMergeData Mergefield Properties:**
@@ -1659,7 +1628,12 @@ This represents a single fax message being sent to a destination.
 | **DETAILED** | Detailed dithering. |
 
 
-### HeaderFormat
+### Header Format
+
+Determines the format of the header line that is printed on the top of the transmitted fax message.
+This is set to **rom %from%, To %to%|%a %b %d %H:%M %Y”**y default which produces the following:
+
+From TSID, To 61022221234 Mon Aug 28 15:32 2012 1 of 1
 
 **Value** | **Description**
 --- | ---
@@ -1683,3 +1657,5 @@ This represents a single fax message being sent to a destination.
 **%W**|Day of the year as a decimal (001 – 366)
 **%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
 **%%**|A literal % character
+
+TODO: The default value is set to: “From %from%, To %to%|%a %b %d %H:%M %Y”
