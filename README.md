@@ -80,15 +80,8 @@ To send a single fax to a fax number or destination a request similar to the fol
         }
 
 ```
-#### Definitions of Fax Options
 
-**Name**|**Required**|**Type**|**Description**|**Default**
------|-----|-----|-----|-----
-**FileData**|**YES**|Base64|The document encoded in Base64 format.|
-**FileName**|**YES**|String|The document filename including extension. This is important as it is used to help identify the document MIME type.|
-**MessageRef**|**YES**|String|A unique user-provided identifier that is used to identify the fax message. This can be used at a later point to retrieve the results of the fax message.|
-**SendTo**|**YES**|String|The phone number the fax message will be sent to.|
-
+You can visit here the available options for apiFaxMessage and sendFaxRequest.
 
 ### Sending a fax with Retries in ApiFaxMessage:
 To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
