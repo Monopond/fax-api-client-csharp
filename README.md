@@ -82,9 +82,9 @@ To send a single fax to a fax number or destination a request similar to the fol
 ```
 
 You can visit the following properties of apiFaxDocument, apiFaxMessage, and sendFaxRequest:
-* [ApiFaxDocument Properties](#ApiFaxDocumentProperties)
-* [ApiFaxMessage Properties](#ApiFaxMessageProperties)
-* [SendFaxRequest Properties](#SendFaxRequestProperties)
+* [ApiFaxDocument Properties](#apiFaxDocument-Properties)
+* [ApiFaxMessage Properties](#apiFaxMessage-Properties)
+* [SendFaxRequest Properties](#sendFaxRequest-Properties)
 
 
 
@@ -1656,7 +1656,7 @@ Verdana-Regular
 Webdings-Regular
 ```
 
-### SendFaxRequest Properties:
+### SendFaxRequest Properties
 **Name**|**Required**|**Type**|**Description**|**Default**
 -----|-----|-----|-----|-----
 **BroadcastRef**||String|Allows the user to tag all faxes in this request with a user-defined broadcastreference. These faxes can then be retrieved at a later point based on this reference.|
@@ -1673,7 +1673,7 @@ Webdings-Regular
 **MustBeSentBeforeDate** | | DateTime |  Specifies a time the fax must be delivered by. Once the specified time is reached the fax will be cancelled across the system. | 
 **MaxFaxPages** | | Unsigned Integer |  Sets a limit on the amount of pages allowed in a single fax transmission. Especially useful if the user is blindly submitting their customer's documents to the platform. | 20
 
-### ApiFaxMessage Properties:
+### ApiFaxMessage Properties
 This represents a single fax message being sent to a destination.
 
 **Name** | **Required** | **Type** | **Description** | **Default** 
