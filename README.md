@@ -82,9 +82,9 @@ To send a single fax to a fax number or destination a request similar to the fol
 ```
 
 You can visit the following properties of apiFaxDocument, apiFaxMessage, and sendFaxRequest:
-* [ApiFaxDocument Properties](#apiFaxDocument-Properties)
-* [ApiFaxMessage Properties](#apiFaxMessage-Properties)
-* [SendFaxRequest Properties](#sendFaxRequest-Properties)
+* [ApiFaxDocument Properties](#apiFaxDocument-properties)
+* [ApiFaxMessage Properties](#apiFaxMessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 
 
