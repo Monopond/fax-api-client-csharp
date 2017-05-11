@@ -914,7 +914,69 @@ To set a ScheduledStartTime for SendFaxRequest, a request must similar to the fo
         }
 ```
 ### Sending a Fax with MustBeSentBeforeDate in ApiFaxMessage
+To set a MustBeSentBeforeDate for ApiFaxMessage, you need to set the value of "MustBeSentBeforeDateSpecified" to true. A request must similar to the following example below can be used.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+	    apiFaxMessage1.MustBeSentBeforeDateSpecified = true;
+	    apiFaxMessage1.MustBeSentBeforeDate = new DateTime();
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
 ### Sending a Fax with MustBeSentBeforeDate in SendFaxRequest
+To set a MustBeSentBeforeDate for SendFaxRequest, you need to set the value of "MustBeSentBeforeDateSpecified" to true. A request must similar to the following example below can be used.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+	    sendFaxRequest.MustBeSentBeforeDateSpecified = true;
+	    sendFaxRequest.MustBeSentBeforeDate = new DateTime();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
 ### Sending a Fax with MaxFaxPages in ApiFaxMessage
 ### Sending a Fax with MaxFaxPages in SendFaxRequest
 
