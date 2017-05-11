@@ -1379,8 +1379,8 @@ This function will throw one of the following SOAP faults/exceptions if somethin
 **InvalidArgumentsException, NoMessagesFoundException, DocumentContentTypeNotFoundException, or InternalServerException.**
 You can find more details on these faults [here](#section5).
 
-##FaxStatus
-###Description
+## FaxStatus
+### Description
 
 This function provides you with a method of retrieving the status, details and results of fax messages sent. While this is a legitimate method of retrieving results we strongly advise that you take advantage of our callback service, which will push these fax results to you as they are completed.
 
@@ -1398,8 +1398,8 @@ There are multiple levels of verbosity available in the request; these are expla
 |--- | --- | --- | --- | ---|
 |**BroadcastRef**|  | *String* | User-defined broadcast reference. |
 |**SendRef**|  | *String* | User-defined send reference. |
-|**MessageRef**|  | *String* | User-defined message reference. |
-|**Verbosity**|  | *String* | Verbosity String The level of detail in the status response. Please see below for a list of possible values.| |
+|**MessageRef**|  | *String* | User-defined message reference. 
+|**Verbosity**|  | *String* | Verbosity String The level of detail in the status response. Please see below for a list of possible values.| 
 
 **Verbosity Levels:**	
   
