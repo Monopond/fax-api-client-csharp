@@ -87,7 +87,6 @@ You can visit the following properties of apiFaxDocument, apiFaxMessage, and sen
 * [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 
-
 ### Sending a fax with Retries in ApiFaxMessage:
 To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
@@ -856,19 +855,6 @@ private static void sendFaxSample_stampMergeData_TextAndImageStamp(ApiService ap
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
-
-
-
-***apiFaxDocument Properties:***
-Represents a fax document to be sent through the system. Supported file types are: PDF, TIFF, PNG, JPG, GIF, TXT, PS, RTF, DOC, DOCX, XLS, XLSX, PPT, PPTX.
-
-**Name**|**Required**|**Type**|**Description**|**Default**
------|-----|-----|-----|-----
-**FileName**|**X**|String|The document filename including extension. This is important as it is used to help identify the document MIME type.|
-**FileData**|**X**|Base64|The document encoded in Base64 format.|
-**Order** | | Integer|If multiple documents are defined on a message this value will determine the order in which they will be transmitted.|0|
-**DocMergeData**|||An Array of MergeFields|
-**StampMergeData**|||An Array of MergeFields|
 
 ***Resolution Levels:***
 
@@ -1655,6 +1641,16 @@ Verdana-Italic
 Verdana-Regular
 Webdings-Regular
 ```
+### ApiFaxDocument Properties
+Represents a fax document to be sent through the system. Supported file types are: PDF, TIFF, PNG, JPG, GIF, TXT, PS, RTF, DOC, DOCX, XLS, XLSX, PPT, PPTX.
+
+**Name**|**Required**|**Type**|**Description**|**Default**
+-----|-----|-----|-----|-----
+**FileName**|**X**|String|The document filename including extension. This is important as it is used to help identify the document MIME type.|
+**FileData**|**X**|Base64|The document encoded in Base64 format.|
+**Order** | | Integer|If multiple documents are defined on a message this value will determine the order in which they will be transmitted.|0|
+**DocMergeData**|||An Array of MergeFields|
+**StampMergeData**|||An Array of MergeFields|
 
 ### SendFaxRequest Properties
 **Name**|**Required**|**Type**|**Description**|**Default**
