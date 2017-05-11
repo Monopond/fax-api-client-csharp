@@ -1920,7 +1920,7 @@ private static void deleteFaxSample(ApiService apiClient)
 **DeleteFaxDocumentRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** |
-|--- | --- | --- | --- | ---|
+|--- | --- | --- | --- | 
 |**DocumentRef**| **X** | *String* | Unique identifier for the document to be deleted. |
 
 ### SOAP Faults
