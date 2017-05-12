@@ -20,7 +20,7 @@ In the project folder, a file called `Program.cs` is provided to show you severa
 
 Create a new instance of the ApiService. This service needs a WSDL, your username and your password. We have two environments for the wsdl, so choose one that is appropriate for you: 
 
-Test WSDL: https://test.api.monopond.com/fax/soap/v2.1/?wsdl
+Test WSDL: http://test.api.monopond.com/fax/soap/v2.1/?wsdl
 
 Production WSDL: https://api.monopond.com/fax/soap/v2.1/?wsdl
 
@@ -28,7 +28,7 @@ Production WSDL: https://api.monopond.com/fax/soap/v2.1/?wsdl
 ```C#
 //Define WSDL URLs
 static String PRODUCTION_URL = "https://api.monopond.com/fax/soap/v2.1/";
-static String TEST_URL = "https://test.api.monopond.com/fax/soap/v2.1/";
+static String TEST_URL = "http://test.api.monopond.com/fax/soap/v2.1/";
 
 // TODO: change user credentials
 string username = "username";
@@ -47,8 +47,8 @@ This is the core function in the API allowing you to send faxes on the platform.
 
 Your specific faxing requirements will dictate which send request type below should be used. The two common use cases would be the sending of a single fax document to one destination and the sending of a single fax document to multiple destinations.
 
-### Sending a single fax:
-To send a fax to a single destination a request similar to the following example can be used:
+###  Fax to a Fax Number/Destination
+ To send a single fax to a fax number or destination, a request similar to the following example code can be used:
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
@@ -66,8 +66,6 @@ To send a fax to a single destination a request similar to the following example
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.Resolution = faxResolution.normal;
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -83,23 +81,153 @@ To send a fax to a single destination a request similar to the following example
 
 ```
 
-### Setting-up your faxes with retries:
+You can visit the following properties of apiFaxDocument, apiFaxMessage, and sendFaxRequest to know its definitions:
+* [ApiFaxDocument Properties](#apifaxdocument-properties)
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+
+### Sending a fax with Retries in ApiFaxMessage:
 To set-up a fax to have retries a request similar to the following example can be used. Please note the addition of ”RetriesSpecified” and ”Retries" , if ”RetriesSpecified” is not supplied or initialized, it will have false value as default and ”Retries" will be ignored.
 ```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
             //create a new fax message.
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.Resolution = faxResolution.normal;
-            apiFaxMessage1.Documents = apiFaxDocuments;
-            
             apiFaxMessage1.RetriesSpecified = true;
             apiFaxMessage1.Retries = 2;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
             
 ```
 
-### Assigning a Resolution in a fax:
+### Sending a fax with Retries in SendFaxRequest:
+To assign a `Retries` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `”RetriesSpecified”` to `true` in order to take effect the value of selected `Retries` in the request. If the `apiFaxmessage` contains `Retries`, it will used as default`Retries` value for fax transmission`.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.RetriesSpecified = true;
+            sendFaxRequest.Retries = 3;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+            
+```
+
+### Sending a fax with BusyRetries in ApiFaxMessage:
+To set-up a fax to have BusyRetries a request similar to the following example can be used. Please note the addition of BusyRetriesSpecified and BusyRetries" , if BusyRetriesSpecified is not supplied or initialized, it will have false value as default and BusyRetries" will be ignored.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.BusyRetriesSpecified = true;
+            apiFaxMessage1.BusyRetries = 2;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }     
+```
+
+### Sending a fax with BusyRetries in SendFaxRequest:
+To assign a `BusyRetries` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `BusyRetriesSpecified` to `true` in order to take effect the value of selected `BusyRetries` in the request. If the `apiFaxmessage` contains `BusyRetries`, it will be used as default `BusyRetries` value for fax transmission.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.BusyRetriesSpecified = true;
+            sendFaxRequest.BusyRetries = 2;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }     
+```
+
+### Sending a Fax with Resolution in ApiFaxMessage:
 To assign a fax to have a `Resolution` in the request similar to the following example can be used. Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request.
 
 ```C#
@@ -118,7 +246,6 @@ To assign a fax to have a `Resolution` in the request similar to the following e
             apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
-            apiFaxMessage1.SendFrom = "Test fax";
             apiFaxMessage1.Resolution = faxResolution.fine;
             apiFaxMessage1.ResolutionSpecified = true;
             apiFaxMessage1.Documents = apiFaxDocuments;
@@ -136,7 +263,47 @@ To assign a fax to have a `Resolution` in the request similar to the following e
 
 ```
 
-### Assigning a FaxDitheringTechnique in a fax:
+You can visit [here](#resolution-types) the different types of Resolutions.
+
+### Sending a Fax with Resolution in SendFaxRequest:
+To assign a `Resolution` in the sendFaxRequest, the request should be similar to the following example below.  Please assign the value of `ResolutionSpecified` to `true` in order to take effect the value of selected `Resolution` in the request. If the `apiFaxmessage` contains `Resolution`, it will be used as default `Resolution` value for fax.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.ResolutionSpecified = true;
+            sendFaxRequest.Resolution = faxResolution.fine;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
+```
+
+You can visit [here](#resolution-types) the different types of Resolutions.
+
+### Sending a Fax with FaxDitheringTechnique in ApiFaxDocument:
 To assign a fax to have a `FaxDitheringTechnique` in the request similar to the following example can be used. Please assign the value of `DitheringTechniqueSpecified` to `true` in order to take effect the value of selected `FaxDitheringTechnique` in the fax request.
 
 ```C#
@@ -146,8 +313,256 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
             apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
             apiFaxDocument.FileName = "test.txt";
-            apiFaxDocument.DitheringTechnique = faxDitheringTechnique.DETAILED;
             apiFaxDocument.DitheringTechniqueSpecified = true;
+            apiFaxDocument.DitheringTechnique = faxDitheringTechnique.DETAILED;
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
+```
+
+You can visit [here](#faxditheringtechnique) the different types of FaxDitheringTechnique.
+
+### Assigning a Timezone in ApiFaxMessage:
+The Timezone will be used to format the datetime display in the fax header, a request similar to the following example below.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.TimeZone = "Australia/Adelaide";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
+```
+
+### Sending a Fax with TimeZone in SendFaxRequest:
+To assign a `TimeZone` in the sendFaxRequest, the request should be similar to the following example below. If the `apiFaxmessage` contains `TimeZone`, it will be used as default `TimeZone` of fax.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.TimeZone = "Australia/Adelaide";
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+
+```
+
+### Assigning a HeaderFormat in ApiFaxMessage:
+Allows the header format that appears at the top of the transmitted fax to be changed, a request similar to the following example below.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.HeaderFormat = "From %from%, To %to%|%a %b %d %H:%M %Y";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+This is the sample output of fax header using the header format above in the request:
+```
+      From TSID, To 61022221234 Wed Apr 26 09:33 2017 1 of 1
+```
+
+You need to visit [here](#headerformat) on how to setup a headerformat value.
+
+### Assigning a HeaderFormat in SendFaxRequest:
+To assign a `HeaderFormat` in the sendFaxRequest, the request should be similar to the following example below. If the `apiFaxmessage` contains `HeaderFormat`, it will be used as default `HeaderFormat` of fax.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.HeaderFormat = "From %from%, To %to%|%a %b %d %H:%M %Y";
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+### Assigning CLI in ApiFaxMessage:
+Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following example below.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.CLI = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+### Assigning CLI in SendFaxRequest:
+Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following example below. If the `apiFaxMessage` contains `CLI`, it will be the default `CLI` value of fax.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendTo = "6011111111";
+            apiFaxMessage1.CLI = "6011111111";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+### Assigning SendFrom in ApiFaxMessage:
+To send fax with SendFrom in apiFaxMessage a request similar to the following example can be used.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
             apiFaxDocument[] apiFaxDocuments;
@@ -158,8 +573,6 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
             apiFaxMessage1.MessageRef = "test-1-1-1";
             apiFaxMessage1.SendTo = "6011111111";
             apiFaxMessage1.SendFrom = "Test fax";
-            apiFaxMessage1.Resolution = faxResolution.fine;
-            apiFaxMessage1.ResolutionSpecified = true;
             apiFaxMessage1.Documents = apiFaxDocuments;
 
             // create an array of api fax messages.
@@ -172,8 +585,502 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
             // call the sendFax method.
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
-
 ```
+
+To know more about SendFrom you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+
+### Assigning SendFrom in SendFaxRequest:
+To send fax with SendFrom in sendFaxRequest a request similar to the following example can be used.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.SendFrom = "6011111111";
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+
+To know more about SendFrom you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+### Sending a Fax with DNCR enabled in ApiFaxMessage
+To send fax with DNCR in apiFaxMessage, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+            apiFaxMessageBlocklist.dncrSpecified = true;
+            apiFaxMessageBlocklist.dncr = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+            apiFaxMessage1.Blocklists = apiFaxMessageBlocklist;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about DNCR you can check it in this following resource:
+* [Blocklists Parameters](#blocklists-parameters)
+
+### Sending a Fax with DNCR enabled in SendFaxRequest
+To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true in order to apply the dncr in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.SendFrom = "Test fax";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+            apiFaxMessageBlocklist.dncrSpecified = true;
+            apiFaxMessageBlocklist.dncr = true;
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.Blocklists = apiFaxMessageBlocklist;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about DNCR you can check it in this following resource:
+* [Blocklists Parameters](#blocklists-parameters)
+
+### Sending a Fax with FPS enabled in ApiFaxMessage
+To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+            apiFaxMessageBlocklist.fpsSpecified = true;
+            apiFaxMessageBlocklist.fps = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+            apiFaxMessage1.Blocklists = apiFaxMessageBlocklist;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about FPS you can check it in this following resource:
+* [Blocklists Parameters](#blocklists-parameters)
+
+### Sending a Fax with FPS enabled in SendFaxRequest
+To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true in order to apply the fps in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+            apiFaxMessageBlocklist.fpsSpecified = true;
+            apiFaxMessageBlocklist.fps = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.Blocklists = apiFaxMessageBlocklist;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about FPS you can check it in this following resource:
+* [Blocklists Parameters](#blocklists-parameters)
+
+### Sending a Fax with Smartblock enabled in ApiFaxMessage
+To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+            apiFaxMessageBlocklist.smartblockSpecified = true;
+            apiFaxMessageBlocklist.smartblock = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+            apiFaxMessage1.Blocklists = apiFaxMessageBlocklist;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about Smartblock you can check it in this following resource:
+* [Blocklists Parameters](#blocklists-parameters)
+
+### Sending a Fax with Smartblock enabled in SendFaxRequest
+To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecified" to true in order to apply the smartblock in the request. A request must be similar to this following example.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+            
+            apiFaxMessageBlocklist apiFaxMessageBlocklist = new apiFaxMessageBlocklist();
+            apiFaxMessageBlocklist.smartblockSpecified = true;
+            apiFaxMessageBlocklist.smartblock = true;
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.Blocklists = apiFaxMessageBlocklist;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about Smartblock you can check it in this following resource:
+* [Blocklists Parameters](#blocklists-parameters)
+
+### Sending a Fax with ScheduledStartTime in ApiFaxMessage
+To set a ScheduledStartTime for ApiFaxMessage, a request must similar to the following example below can be used.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.ScheduledStartTime = "2017-03-25T12:00:00Z";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about ScheduledStartTime you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+### Sending a Fax with ScheduledStartTime in SendFaxRequest
+To set a ScheduledStartTime for SendFaxRequest, a request must similar to the following example below can be used.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.ScheduledStartTime = "2017-03-25T12:00:00Z";
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about ScheduledStartTime you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+### Sending a Fax with MustBeSentBeforeDate in ApiFaxMessage
+To set a MustBeSentBeforeDate for ApiFaxMessage, you need to set the value of "MustBeSentBeforeDateSpecified" to true. A request must similar to the following example below can be used.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.MustBeSentBeforeDateSpecified = true;
+            apiFaxMessage1.MustBeSentBeforeDate = new DateTime();
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about MustBeSentBeforeDate you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+### Sending a Fax with MustBeSentBeforeDate in SendFaxRequest
+To set a MustBeSentBeforeDate for SendFaxRequest, you need to set the value of "MustBeSentBeforeDateSpecified" to true. A request must similar to the following example below can be used.
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+	    
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.MustBeSentBeforeDateSpecified = true;
+            sendFaxRequest.MustBeSentBeforeDate = new DateTime();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about MustBeSentBeforeDate you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+### Sending a Fax with MaxFaxPages in ApiFaxMessage
+To set a MaxFaxPages for ApiFaxMessage, you need to set the value of "MaxFaxPagesSpecified" to true. A request must similar to the following example below can be used.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.MaxFaxPagesSpecified = true;
+            apiFaxMessage1.MaxFaxPages = 2;
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+        
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about MaxFaxPages you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
+
+### Sending a Fax with MaxFaxPages in SendFaxRequest
+To set a MaxFaxPages for SendFaxRequest, you need to set the value of "MaxFaxPagesSpecified" to true. A request must similar to the following example below can be used.
+
+```C#
+         private static void sendFaxSample(ApiService apiClient)
+        {
+            // create a new fax document.
+            apiFaxDocument apiFaxDocument = new apiFaxDocument();
+            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileName = "test.txt";
+
+            // create an array of api fax documents.
+            apiFaxDocument[] apiFaxDocuments;
+            apiFaxDocuments = new apiFaxDocument[1] { apiFaxDocument };
+                           
+            //create a new fax message.
+            apiFaxMessage apiFaxMessage1 = new apiFaxMessage();
+            apiFaxMessage1.MessageRef = "test-1-1-1";
+            apiFaxMessage1.Documents = apiFaxDocuments;
+
+            // create an array of api fax messages.
+            apiFaxMessage[] apiFaxMessages = new apiFaxMessage[1] { apiFaxMessage1 };
+        
+            //create a new instance of sendFax request.
+            sendFaxRequest sendFaxRequest = new sendFaxRequest();
+            sendFaxRequest.MaxFaxPagesSpecified = true;
+            sendFaxRequest.MaxFaxPages = 2;
+            sendFaxRequest.FaxMessages = apiFaxMessages;
+
+            // call the sendFax method.
+            sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
+        }
+```
+To know more about MaxFaxPages you can check it in these following resources:
+* [ApiFaxMessage Properties](#apifaxmessage-properties)
+* [SendFaxRequest Properties](#sendfaxrequest-properties)
 
 ### Sending multiple faxes:
 To send faxes to multiple destinations a request similar to the following example can be used. Please note the addition of another “FaxMessage”:
@@ -216,6 +1123,7 @@ To send faxes to multiple destinations a request similar to the following exampl
             sendFaxResponse sendFaxResponse = apiClient.SendFax(sendFaxRequest);
         }
 ```
+
 ### Sending faxes to multiple destinations with the same document (broadcasting):
 To send the same fax content to multiple destinations (broadcasting) a request similar to the example below can be used.
 
@@ -263,7 +1171,7 @@ private static void sendFaxSample(ApiService apiClient)
 
 When sending multiple faxes in batch it is recommended to group them into requests of around 600 fax messages for optimal performance. If you are sending the same document to multiple destinations it is strongly advised to only attach the document once in the root of the send request rather than attaching a document for each destination.
 
-###Sending Microsoft Documents With DocMergeData:
+### Sending Microsoft Documents With DocMergeData:
 (This request only works in version 2.1(or higher) of the fax-api.)
 
 This request is used to send a Microsoft document with replaceable variables or merge fields. The merge field follows the pattern ```<mf:key>```.  If your key is ```field1```, it should be typed as ```<mf:field1>``` in the document. Note that the key must be unique within the whole document. The screenshots below are examples of what the request does.
@@ -424,92 +1332,6 @@ private static void sendFaxSample_stampMergeData_TextAndImageStamp(ApiService ap
         }
 ```
 
-### sendFaxRequest Properties:
-**Name**|**Required**|**Type**|**Description**|**Default**
------|-----|-----|-----|-----
-**BroadcastRef**||String|Allows the user to tag all faxes in this request with a user-defined broadcastreference. These faxes can then be retrieved at a later point based on this reference.|
-**SendRef**||String|Similar to the BroadcastRef, this allows the user to tag all faxes in this request with a send reference. The SendRef is used to represent all faxes in this request only, so naturally it must be unique.|
-**FaxMessages**|**X**| Array of FaxMessage |FaxMessages describe each individual fax message and its destination. See below for details.|
-**SendFrom**||Alphanumeric String|A customisable string used to identify the sender of the fax. Also known as the Transmitting Subscriber Identification (TSID). The maximum string length is 32 characters|Fax
-**Documents**|**X**|Array of apiFaxDocument|Each FaxDocument object describes a fax document to be sent. Multiple documents can be defined here which will be concatenated and sent in the same message. See below for details.|
-**Resolution**||Resolution|Resolution setting of the fax document. Refer to the resolution table below for possible resolution values.|normal
-**ScheduledStartTime**||DateTime|The date and time the transmission of the fax will start.|Current time (immediate sending)
-**Blocklists**||Blocklists|The blocklists that will be checked and filtered against before sending the message. See below for details.WARNING: This feature is inactive and non-functional in this (2.1) version of the Fax API.|
-**Retries**||Unsigned Integer|The number of times to retry sending the fax if it fails. Each account has a maximum number of retries that can be changed by consultation with your account manager.|Account Default
-**BusyRetries**||Unsigned Integer|Certain fax errors such as “NO_ANSWER” or “BUSY” are not included in the above retries limit and can be set separately. Each account has a maximum number of busy retries that can be changed by consultation with your account manager.|Account default
-**HeaderFormat**||String|Allows the header format that appears at the top of the transmitted fax to be changed. See below for an explanation of how to format this field.| From: X, To: X
-**MustBeSentBeforeDate** | | DateTime |  Specifies a time the fax must be delivered by. Once the specified time is reached the fax will be cancelled across the system. | 
-**MaxFaxPages** | | Unsigned Integer |  Sets a limit on the amount of pages allowed in a single fax transmission. Especially useful if the user is blindly submitting their customer's documents to the platform. | 20
-
-***apiFaxMessage Properties:***
-This represents a single fax message being sent to a destination.
-
-**Name** | **Required** | **Type** | **Description** | **Default** 
------|-----|-----|-----|-----
-**MessageRef** | **X** | String | A unique user-provided identifier that is used to identify the fax message. This can be used at a later point to retrieve the results of the fax message. |
-**SendTo** | **X** | String | The phone number the fax message will be sent to. |
-**SendFrom** | | Alphanumeric String | A customisable string used to identify the sender of the fax. Also known as the Transmitting Subscriber Identification (TSID). The maximum string length is 32 characters | Empty
-**Documents** | **X** | Array of apiFaxDocument | Each FaxDocument object describes a fax document to be sent. Multiple documents can be defined here which will be concatenated and sent in the same message. See below for details. | 
-**Resolution** | | Resolution|Resolution setting of the fax document. Refer to the resolution table below for possible resolution values.| normal
-**ScheduledStartTime** | | DateTime | The date and time the transmission of the fax will start. | Start now
-**Blocklists** | | Blocklists | The blocklists that will be checked and filtered against before sending the message. See below for details. WARNING: This feature is inactive and non-functional in this (2.1) version of the Fax API. |
-**Retries** | | Unsigned Integer | The number of times to retry sending the fax if it fails. Each account has a maximum number of retries that can be changed by consultation with your account manager. | Account Default
-**RetriesSpecified** | | Boolean | Indicator if Retries values will be ignored or not.  | False
-**BusyRetries** | | Unsigned Integer | Certain fax errors such as “NO_ANSWER” or “BUSY” are not included in the above retries limit and can be set separately. Please consult with your account manager in regards to maximum value.|account default
-**HeaderFormat** | | String | Allows the header format that appears at the top of the transmitted fax to be changed. See below for an explanation of how to format this field. | From： X, To: X
-**MustBeSentBeforeDate** | | DateTime |  Specifies a time the fax must be delivered by. Once the specified time is reached the fax will be cancelled across the system. | 
-**MaxFaxPages** | | Unsigned Integer |  Sets a limit on the amount of pages allowed in a single fax transmission. Especially useful if the user is blindly submitting their customer's documents to the platform. | 20
-**CLI**| | String| Allows a customer called ID. Note: Must be enabled on the account before it can be used.
-
-***apiFaxDocument Properties:***
-Represents a fax document to be sent through the system. Supported file types are: PDF, TIFF, PNG, JPG, GIF, TXT, PS, RTF, DOC, DOCX, XLS, XLSX, PPT, PPTX.
-
-**Name**|**Required**|**Type**|**Description**|**Default**
------|-----|-----|-----|-----
-**FileName**|**X**|String|The document filename including extension. This is important as it is used to help identify the document MIME type.|
-**FileData**|**X**|Base64|The document encoded in Base64 format.|
-**Order** | | Integer|If multiple documents are defined on a message this value will determine the order in which they will be transmitted.|0|
-**DocMergeData**|||An Array of MergeFields|
-**StampMergeData**|||An Array of MergeFields|
-
-***Resolution Levels:***
-
-| **Value** | **Description** |
-| --- | --- |
-| **normal** | Normal standard resolution (98 scan lines per inch) |
-| **fine** | Fine resolution (196 scan lines per inch) |
-
-***Header Format:iff***
-Determines the format of the header line that is printed on the top of the transmitted fax message.
-This is set to **rom %from%, To %to%|%a %b %d %H:%M %Y”**y default which produces the following:
-
-From TSID, To 61022221234 Mon Aug 28 15:32 2012 1 of 1
-
-**Value** | **Description**
---- | ---
-**%from%**|The value of the **SendFrom** field in the message.
-**%to%**|The value of the **SendTo** field in the message.
-**%a**|Weekday name (abbreviated)
-**%A**|Weekday name
-**%b**|Month name (abbreviated)
-**%B**|Month name
-**%d**|Day of the month as a decimal (01 – 31)
-**%m**|Month as a decimal (01 – 12)
-**%y**|Year as a decimal (abbreviated)
-**%Y**|Year as a decimal
-**%H**|Hour as a decimal using a 24-hour clock (00 – 23)
-**%I**|Hour as a decimal using a 12-hour clock (01 – 12)
-**%M**|Minute as a decimal (00 – 59)
-**%S**|Second as a decimal (00 – 59)
-**%p**|AM or PM
-**%j**|Day of the year as a decimal (001 – 366)
-**%U**|Week of the year as a decimal (Monday as first day of the week) (00 – 53)
-**%W**|Day of the year as a decimal (001 – 366)
-**%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
-**%%**|A literal % character
-
-TODO: The default value is set to: “From %from%, To %to%|%a %b %d %H:%M %Y”
-
 <a name="docMergeDataParameters"></a> 
 
 **DocMergeData Mergefield Properties:**
@@ -557,8 +1379,8 @@ This function will throw one of the following SOAP faults/exceptions if somethin
 **InvalidArgumentsException, NoMessagesFoundException, DocumentContentTypeNotFoundException, or InternalServerException.**
 You can find more details on these faults [here](#section5).
 
-##FaxStatus
-###Description
+## FaxStatus
+### Description
 
 This function provides you with a method of retrieving the status, details and results of fax messages sent. While this is a legitimate method of retrieving results we strongly advise that you take advantage of our callback service, which will push these fax results to you as they are completed.
 
@@ -573,11 +1395,11 @@ There are multiple levels of verbosity available in the request; these are expla
 **FaxStatusRequest Properties:**
 
 | **Name** | **Required** | **Type** | **Description** |
-|--- | --- | --- | --- | ---|
+|--- | --- | --- | --- | 
 |**BroadcastRef**|  | *String* | User-defined broadcast reference. |
 |**SendRef**|  | *String* | User-defined send reference. |
-|**MessageRef**|  | *String* | User-defined message reference. |
-|**Verbosity**|  | *String* | Verbosity String The level of detail in the status response. Please see below for a list of possible values.| |
+|**MessageRef**|  | *String* | User-defined message reference.|
+|**Verbosity**|  | *String* | Verbosity String The level of detail in the status response. Please see below for a list of possible values.| 
 
 **Verbosity Levels:**	
   
@@ -703,7 +1525,7 @@ Contains the total count of how many faxes ended in each result, as well as some
 **FaxDetails:**
 
 | Name | Type | Verbosity |
-| --- | --- | --- | --- |
+| --- | --- | --- | 
 | **sendFrom** | *Alphanumeric String* | *details* |
 | **resolution** | *String* | *details* |
 | **retries** | *Integer* | *details* |
@@ -765,7 +1587,7 @@ When making a stop request you must provide at least a `BroadcastRef`, `SendRef`
 #### StopFaxRequest Properties:
 
 | Name | Required | Type | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | 
 | **BroadcastRef** | | *String* | User-defined broadcast reference. |
 | **SendRef** |  | *String* | User-defined send reference. |
 | **MessageRef** |  | *String* | User-defined message reference. |
@@ -811,23 +1633,23 @@ private static void stopFaxSample(ApiService apiClient)
 ```
 
 
-###Response
+### Response
 The response received from a `StopFaxRequest` is the same response you would receive when calling the `FaxStatus` method call with the `send` verbosity level.
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults [here](#section5).
-##PauseFax
+## PauseFax
 
-###Description
+### Description
 Pauses a fax message before it starts transmitting. This fax message must either be queued, starting or sending. Please note the fax cannot be paused if the message is currently being transmitted to the destination device.
 
 When making a pause request, you must provide at least a `BroadcastRef`, `SendRef` or `MessageRef`. The function will also accept a combination of these to further narrow down the request. 
 
-###Request
-####PauseFaxRequest Properties:
+### Request
+#### PauseFaxRequest Properties:
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
 | **BroadcastRef** | | *String* | User-defined broadcast reference. |
@@ -835,7 +1657,7 @@ When making a pause request, you must provide at least a `BroadcastRef`, `SendRe
 | **MessageRef** | | *String* | User-defined message reference. |
 
 
-###PauseFax Request limiting by BroadcastRef:
+### PauseFax Request limiting by BroadcastRef:
 ```C#
 private static void pauseFaxSample(ApiService apiClient)
         {
@@ -848,7 +1670,7 @@ private static void pauseFaxSample(ApiService apiClient)
         }
 ```
 
-###PauseFax Request limiting by SendRef:
+### PauseFax Request limiting by SendRef:
 ```C#
 private static void pauseFaxSample(ApiService apiClient)
         {
@@ -860,7 +1682,7 @@ private static void pauseFaxSample(ApiService apiClient)
             pauseFaxResponse pauseFaxResponse = apiClient.PauseFax(pauseFaxRequest);
         }
 ```
-###PauseFax Request limiting by MessageRef:
+### PauseFax Request limiting by MessageRef:
 ```C#
 private static void pauseFaxSample(ApiService apiClient)
         {
@@ -873,27 +1695,27 @@ private static void pauseFaxSample(ApiService apiClient)
         }
 ```
 
-###Response
+### Response
 The response received from a `PauseFaxRequest` is the same response you would receive when calling the `FaxStatus` method call with the `send` verbosity level. 
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults in [here](#section5).
 
-##ResumeFax
+## ResumeFax
 
 When making a resume request, you must provide at least a `BroadcastRef`, `SendRef` or `MessageRef`. The function will also accept a combination of these to further narrow down the request. 
 
-###Request
-####ResumeFaxRequest Properties:
+### Request
+#### ResumeFaxRequest Properties:
 | Name | Required | Type | Description |
 | --- | --- | --- | --- |
 | **BroadcastRef** | | *String* | User-defined broadcast reference. |
 | **SendRef** | | *String* | User-defined send reference. |
 | **MessageRef** | | *String* | User-defined message reference. |
 
-###ResumeFax Request limiting by BroadcastRef:
+### ResumeFax Request limiting by BroadcastRef:
 ```C#
 private static void resumeFaxSample(ApiService apiClient)
         {
@@ -905,7 +1727,7 @@ private static void resumeFaxSample(ApiService apiClient)
             resumeFaxResponse resumeFaxResponse = apiClient.ResumeFax(resumeFaxRequest);
         }
 ```
-###ResumeFax Request limiting by SendRef:
+### ResumeFax Request limiting by SendRef:
 ```C#
 private static void resumeFaxSample(ApiService apiClient)
         {
@@ -917,7 +1739,7 @@ private static void resumeFaxSample(ApiService apiClient)
             resumeFaxResponse resumeFaxResponse = apiClient.ResumeFax(resumeFaxRequest);
         }
 ```
-###ResumeFax Request limiting by MessageRef:
+### ResumeFax Request limiting by MessageRef:
 ```C#
 private static void resumeFaxSample(ApiService apiClient)
         {
@@ -931,20 +1753,20 @@ private static void resumeFaxSample(ApiService apiClient)
 ```
 
 
-###Response
+### Response
 The response received from a `ResumeFaxRequest` is the same response you would receive when calling the `FaxStatus` method call with the `send` verbosity level. 
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **InvalidArgumentsException**, **NoMessagesFoundException**, or **InternalServerException**.
 You can find more details on these faults [here](#section5).
 
-##FaxDocumentPreview
-###Description
+## FaxDocumentPreview
+### Description
 
 This function provides you with a method to generate a preview of a saved document at different resolutions with various dithering settings. It returns a tiff data in base64 along with a page count.
 
-###Sample Request
+### Sample Request
 ```c#
 private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient)
         {
@@ -980,7 +1802,7 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
         }
 ```
 
-###Request
+### Request
 **FaxDocumentPreviewRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** | **Default** |
@@ -1027,29 +1849,8 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
 |**fileName** |  | *String* | The document filename including extension. This is important as it is used to help identify the document MIME type. |
 |**fileData** |  | *Base64* | The document encoded in Base64 format. |
 
-**FaxDitheringTechnique:**
 
-| Value | Fax Dithering Technique |
-| --- | --- |
-| **none** | No dithering. |
-| **normal** | Normal dithering.|
-| **turbo** | Turbo dithering.|
-| **darken** | Darken dithering.|
-| **darken_more** | Darken more dithering.|
-| **darken_extra** | Darken extra dithering.|
-| **lighten** | Lighten dithering.|
-| **lighten_more** | Lighten more dithering. |
-| **crosshatch** | Crosshatch dithering. |
-| **DETAILED** | Detailed dithering. |
-
-**Resolution Levels:**
-
-| **Value** | **Description** |
-| --- | --- |
-| **normal** | Normal standard resolution (98 scan lines per inch) |
-| **fine** | Fine resolution (196 scan lines per inch) |
-
-###Response
+### Response
 **FaxDocumentPreviewResponse**
 
 **Name** | **Type** | **Description** 
@@ -1057,17 +1858,17 @@ private static void faxDocumentPreviewSample_stampMergeData(ApiService apiClient
 **TiffPreview** | *String* | A preview version of the document encoded in Base64 format. 
 **NumberOfPages** | *Int* | Total number of pages in the document preview.
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **DocumentRefDoesNotExistException**, **InternalServerException**, **UnsupportedDocumentContentType**, **MergeFieldDoesNotMatchDocumentTypeException**, **UnknownHostException**.
 You can find more details on these faults in Section 5 of this document.You can find more details on these faults in the next section of this document.
 
-##SaveFaxDocument
-###Description
+## SaveFaxDocument
+### Description
 
 This function allows you to upload a document and save it under a document reference (DocumentRef) for later use. (Note: These saved documents only last 30 days on the system.)
 
-###Sample Request
+### Sample Request
 
 ```c#
 private static void saveFaxDocumentSample(ApiService apiClient)
@@ -1083,26 +1884,26 @@ private static void saveFaxDocumentSample(ApiService apiClient)
         }
 ```
 
-###Request
+### Request
 **SaveFaxDocumentRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** |
-|--- | --- | --- | --- | ---|
+|--- | --- | --- | --- | 
 |**DocumentRef**| **X** | *String* | Unique identifier for the document to be uploaded. |
 |**FileName**| **X** | *String* | The document filename including extension. This is important as it is used to help identify the document MIME type. |
 | **FileData**|**X**| *Base64* |The document encoded in Base64 format.| |
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **DocumentRefAlreadyExistsException**, **DocumentContentTypeNotFoundException**, **InternalServerException**.
 You can find more details on these faults in Section 5 of this document.You can find more details on these faults in the next section of this document.
 
-##DeleteFaxDocument
-###Description
+## DeleteFaxDocument
+### Description
 
 This function removes a saved fax document from the system.
 
-###Sample Request
+### Sample Request
 ```C#
 private static void deleteFaxSample(ApiService apiClient)
         {
@@ -1115,40 +1916,40 @@ private static void deleteFaxSample(ApiService apiClient)
         }
 ```
 
-###Request
+### Request
 **DeleteFaxDocumentRequest Parameters:**
 
 | **Name** | **Required** | **Type** | **Description** |
-|--- | --- | --- | --- | ---|
+|--- | --- | --- | --- | 
 |**DocumentRef**| **X** | *String* | Unique identifier for the document to be deleted. |
 
-###SOAP Faults
+### SOAP Faults
 This function will throw one of the following SOAP faults/exceptions if something went wrong:
 **DocumentRefDoesNotExistException**, **InternalServerException**.
 You can find more details on these faults in Section 5 of this document.You can find more details on these faults in the next section of this document.
 
 <a name="section5"></a> 
-#More Information
-##Exceptions/SOAP Faults
+# More Information
+## Exceptions/SOAP Faults
 If an error occurs during a request on the Monopond Fax API the service will throw a SOAP fault or exception. Each exception is listed in detail below. 
-###InvalidArgumentsException
+### InvalidArgumentsException
 One or more of the arguments passed in the request were invalid. Each element that failed validation is included in the fault details along with the reason for failure.
-###DocumentContentTypeNotFoundException
+### DocumentContentTypeNotFoundException
 There was an error while decoding the document provided; we were unable to determine its content type.
-###DocumentRefAlreadyExistsException
+###D ocumentRefAlreadyExistsException
 There is already a document on your account with this DocumentRef.
-###DocumentContentTypeNotFoundException
+### DocumentContentTypeNotFoundException
 Content type could not be found for the document.
-###NoMessagesFoundException
+### NoMessagesFoundException
 Based on the references sent in the request no messages could be found that match the criteria.
-###InternalServerException
+### InternalServerException
 An unusual error occurred on the platform. If this error occurs please contact support for further instruction.
 
-##General Properties and File Formatting
-###File Encoding
+## General Properties and File Formatting
+### File Encoding
 All files are encoded in the Base64 encoding specified in RFC 2045 - MIME (Multipurpose Internet Mail Extensions). The Base64 encoding is designed to represent arbitrary sequences of octets in a form that need not be humanly readable. A 65-character subset ([A-Za-z0-9+/=]) of US-ASCII is used, enabling 6 bits to be represented per printable character. For more information see http://tools.ietf.org/html/rfc2045 and http://en.wikipedia.org/wiki/Base64
 
-###Dates
+### Dates
 Dates are always passed in ISO-8601 format with time zone. For example: “2012-07-17T19:27:23+08:00”
 
 ## List of Supported font names for StampMergeField TextValue
@@ -1271,3 +2072,114 @@ Verdana-Italic
 Verdana-Regular
 Webdings-Regular
 ```
+### ApiFaxDocument Properties
+Represents a fax document to be sent through the system. Supported file types are: PDF, TIFF, PNG, JPG, GIF, TXT, PS, RTF, DOC, DOCX, XLS, XLSX, PPT, PPTX.
+
+**Name**|**Required**|**Type**|**Description**|**Default**
+-----|-----|-----|-----|-----
+**FileName**|**X**|String|The document filename including extension. This is important as it is used to help identify the document MIME type.|
+**FileData**|**X**|Base64|The document encoded in Base64 format.|
+**Order** | | Integer|If multiple documents are defined on a message this value will determine the order in which they will be transmitted.|0|
+**DocMergeData**|||An Array of MergeFields|
+**StampMergeData**|||An Array of MergeFields|
+
+### SendFaxRequest Properties
+**Name**|**Required**|**Type**|**Description**|**Default**
+-----|-----|-----|-----|-----
+**BroadcastRef**||String|Allows the user to tag all faxes in this request with a user-defined broadcastreference. These faxes can then be retrieved at a later point based on this reference.|
+**SendRef**||String|Similar to the BroadcastRef, this allows the user to tag all faxes in this request with a send reference. The SendRef is used to represent all faxes in this request only, so naturally it must be unique.|
+**FaxMessages**|**X**| Array of FaxMessage |FaxMessages describe each individual fax message and its destination. See below for details.|
+**SendFrom**||Alphanumeric String|A customisable string used to identify the sender of the fax. Also known as the Transmitting Subscriber Identification (TSID). The maximum string length is 32 characters|Fax
+**Documents**|**X**|Array of apiFaxDocument|Each FaxDocument object describes a fax document to be sent. Multiple documents can be defined here which will be concatenated and sent in the same message. See below for details.|
+**Resolution**||Resolution|Resolution setting of the fax document. Refer to the resolution table below for possible resolution values.|normal
+**ScheduledStartTime**||DateTime|The date and time the transmission of the fax will start.|Current time (immediate sending)
+**Blocklists**||Blocklists|The blocklists that will be checked and filtered against before sending the message. See below for details.WARNING: This feature is inactive and non-functional in this (2.1) version of the Fax API.|
+**Retries**||Unsigned Integer|The number of times to retry sending the fax if it fails. Each account has a maximum number of retries that can be changed by consultation with your account manager.|Account Default
+**BusyRetries**||Unsigned Integer|Certain fax errors such as “NO_ANSWER” or “BUSY” are not included in the above retries limit and can be set separately. Each account has a maximum number of busy retries that can be changed by consultation with your account manager.|Account default
+**HeaderFormat**||String|Allows the header format that appears at the top of the transmitted fax to be changed. See below for an explanation of how to format this field.| From: X, To: X
+**MustBeSentBeforeDate** | | DateTime |  Specifies a time the fax must be delivered by. Once the specified time is reached the fax will be cancelled across the system. | 
+**MaxFaxPages** | | Unsigned Integer |  Sets a limit on the amount of pages allowed in a single fax transmission. Especially useful if the user is blindly submitting their customer's documents to the platform. | 20
+
+### ApiFaxMessage Properties
+This represents a single fax message being sent to a destination.
+
+**Name** | **Required** | **Type** | **Description** | **Default** 
+-----|-----|-----|-----|-----
+**MessageRef** | **X** | String | A unique user-provided identifier that is used to identify the fax message. This can be used at a later point to retrieve the results of the fax message. |
+**SendTo** | **X** | String | The phone number the fax message will be sent to. |
+**SendFrom** | | Alphanumeric String | A customisable string used to identify the sender of the fax. Also known as the Transmitting Subscriber Identification (TSID). The maximum string length is 32 characters | Empty
+**Documents** | **X** | Array of apiFaxDocument | Each FaxDocument object describes a fax document to be sent. Multiple documents can be defined here which will be concatenated and sent in the same message. See below for details. | 
+**Resolution** | | Resolution|Resolution setting of the fax document. Refer to the resolution table below for possible resolution values.| normal
+**ScheduledStartTime** | | DateTime | The date and time the transmission of the fax will start. | Start now
+**Blocklists** | | Blocklists | The blocklists that will be checked and filtered against before sending the message. See below for details. WARNING: This feature is inactive and non-functional in this (2.1) version of the Fax API. |
+**Retries** | | Unsigned Integer | The number of times to retry sending the fax if it fails. Each account has a maximum number of retries that can be changed by consultation with your account manager. | Account Default
+**RetriesSpecified** | | Boolean | Indicator if Retries values will be ignored or not.  | False
+**BusyRetries** | | Unsigned Integer | Certain fax errors such as “NO_ANSWER” or “BUSY” are not included in the above retries limit and can be set separately. Please consult with your account manager in regards to maximum value.|account default
+**HeaderFormat** | | String | Allows the header format that appears at the top of the transmitted fax to be changed. See below for an explanation of how to format this field. | From： X, To: X
+**MustBeSentBeforeDate** | | DateTime |  Specifies a time the fax must be delivered by. Once the specified time is reached the fax will be cancelled across the system. | 
+**MaxFaxPages** | | Unsigned Integer |  Sets a limit on the amount of pages allowed in a single fax transmission. Especially useful if the user is blindly submitting their customer's documents to the platform. | 20
+**CLI**| | String| Allows a customer called ID. Note: Must be enabled on the account before it can be used.
+
+
+### Resolution Types
+
+| **Value** | **Description** |
+| --- | --- |
+| **normal** | Normal standard resolution (98 scan lines per inch) |
+| **fine** | Fine resolution (196 scan lines per inch) |
+
+### FaxDitheringTechnique
+
+| Value | Fax Dithering Technique |
+| --- | --- |
+| **none** | No dithering. |
+| **normal** | Normal dithering.|
+| **turbo** | Turbo dithering.|
+| **darken** | Darken dithering.|
+| **darken_more** | Darken more dithering.|
+| **darken_extra** | Darken extra dithering.|
+| **lighten** | Lighten dithering.|
+| **lighten_more** | Lighten more dithering. |
+| **crosshatch** | Crosshatch dithering. |
+| **DETAILED** | Detailed dithering. |
+
+
+### HeaderFormat
+
+Determines the format of the header line that is printed on the top of the transmitted fax message.
+This is set to **rom %from%, To %to%|%a %b %d %H:%M %Y”**y default which produces the following:
+
+From TSID, To 61022221234 Mon Aug 28 15:32 2012 1 of 1
+
+**Value** | **Description**
+--- | ---
+**%from%**|The value of the **SendFrom** field in the message.
+**%to%**|The value of the **SendTo** field in the message.
+**%a**|Weekday name (abbreviated)
+**%A**|Weekday name
+**%b**|Month name (abbreviated)
+**%B**|Month name
+**%d**|Day of the month as a decimal (01 – 31)
+**%m**|Month as a decimal (01 – 12)
+**%y**|Year as a decimal (abbreviated)
+**%Y**|Year as a decimal
+**%H**|Hour as a decimal using a 24-hour clock (00 – 23)
+**%I**|Hour as a decimal using a 12-hour clock (01 – 12)
+**%M**|Minute as a decimal (00 – 59)
+**%S**|Second as a decimal (00 – 59)
+**%p**|AM or PM
+**%j**|Day of the year as a decimal (001 – 366)
+**%U**|Week of the year as a decimal (Monday as first day of the week) (00 – 53)
+**%W**|Day of the year as a decimal (001 – 366)
+**%w**|Day of the week as a decimal (0 – 6) (Sunday being 0)
+**%%**|A literal % character
+
+TODO: The default value is set to: “From %from%, To %to%|%a %b %d %H:%M %Y”
+
+### Blocklists Parameters
+
+| **Name** | **Required** | **Type** | **Description** |
+| --- | --- | --- | --- |
+| **smartblock** | false | boolean | Blocks sending to a number if it has consistently failed in the past. |
+| **fps** | false | boolean | Wash numbers against the fps blocklist. |
+| **dncr** | false | boolean | Wash numbers against the dncr blocklist. |
