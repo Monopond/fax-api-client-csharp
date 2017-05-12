@@ -47,8 +47,8 @@ This is the core function in the API allowing you to send faxes on the platform.
 
 Your specific faxing requirements will dictate which send request type below should be used. The two common use cases would be the sending of a single fax document to one destination and the sending of a single fax document to multiple destinations.
 
-### Sending a single Fax to Fax Number/Destination:
-To send a single fax to a fax number or destination a request similar to the following code example can be used:
+###  Fax to a Fax Number/Destination
+ To send a single fax to a fax number or destination, a request similar to the following example code can be used:
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
