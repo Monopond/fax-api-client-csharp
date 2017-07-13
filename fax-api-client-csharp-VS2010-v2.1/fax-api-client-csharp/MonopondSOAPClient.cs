@@ -27,6 +27,7 @@ using System.Linq;
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Web.Services.WebServiceBindingAttribute(Name="ApiServiceSoapBinding", Namespace="https://api.monopond.com/fax/soap/v2.1")]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DocumentRefDoesNotExistException))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnsupportedDocumentContentType))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnknownHostException))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(InterruptedException))]
@@ -475,6 +476,28 @@ public partial class UnknownHostException {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
 public partial class InterruptedException {
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+public partial class DocumentRefDoesNotExistException {
+
+    private string messageField;
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+    public string message {
+        get {
+            return this.messageField;
+        }
+        set {
+            this.messageField = value;
+        }
+    }
 }
 
 /// <remarks/>
