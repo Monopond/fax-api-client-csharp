@@ -47,7 +47,7 @@ namespace fax_api_client_csharp
         private static void sendFaxSample(ApiService apiClient)
         {
             // Converts file to base64 string data.
-	        Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
             string base64StringOfFile = Convert.ToBase64String(bytes);
             
             // create a new fax document.
