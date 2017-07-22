@@ -512,7 +512,7 @@ namespace fax_api_client_csharp
         private static string sample_TiffFileData()
         {
             // Converts file to base64 string data.
-	        Byte[] bytes = File.ReadAllBytes(@"..\..\sampleTiffBase64.txt");
+	    Byte[] bytes = File.ReadAllBytes(@"..\..\sampleTiffBase64.txt");
             string base64StringOfFile = Convert.ToBase64String(bytes);
            
             return base64StringOfFile;
@@ -521,7 +521,7 @@ namespace fax_api_client_csharp
         private static string sample_StampData()
         {
             // Converts file to base64 string data.
-	        Byte[] bytes = File.ReadAllBytes(@"..\..\sampleTiffBase64.txt");
+	    Byte[] bytes = File.ReadAllBytes(@"..\..\sampleTiffBase64.txt");
             string base64StringOfFile = Convert.ToBase64String(bytes);
             
             return base64StringOfFile;
@@ -530,7 +530,7 @@ namespace fax_api_client_csharp
         private static string sample_DocxFileData() 
         {
             // Converts file to base64 string data.
-	        Byte[] bytes = File.ReadAllBytes(@"..\..\sample.docx");
+	    Byte[] bytes = File.ReadAllBytes(@"..\..\sample.docx");
             string base64StringOfFile = Convert.ToBase64String(bytes);
             
             return base64StringOfFile;
