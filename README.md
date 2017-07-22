@@ -53,9 +53,12 @@ Your specific faxing requirements will dictate which send request type below sho
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
