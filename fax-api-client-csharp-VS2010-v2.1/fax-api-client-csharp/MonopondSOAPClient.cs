@@ -30,6 +30,7 @@ using System.Linq;
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnsupportedDocumentContentType))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(UnknownHostException))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(InterruptedException))]
+[System.Xml.Serialization.XmlIncludeAttribute(typeof(DocumentRefDoesNotExistException))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(webFaultBean))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(apiResponse))]
 [System.Xml.Serialization.XmlIncludeAttribute(typeof(apiRequest))]
@@ -475,6 +476,15 @@ public partial class UnknownHostException {
 [System.ComponentModel.DesignerCategoryAttribute("code")]
 [System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
 public partial class InterruptedException {
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("wsdl", "2.0.50727.3038")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="https://api.monopond.com/fax/soap/v2.1")]
+public partial class DocumentRefDoesNotExistException {
 }
 
 /// <remarks/>
