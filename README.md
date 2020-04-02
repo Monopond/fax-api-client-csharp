@@ -53,9 +53,13 @@ Your specific faxing requirements will dictate which send request type below sho
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -92,9 +96,13 @@ To set-up a fax to have retries a request similar to the following example can b
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -128,9 +136,13 @@ To assign a `Retries` in the sendFaxRequest, the request should be similar to th
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -163,9 +175,13 @@ To set-up a fax to have BusyRetries a request similar to the following example c
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -198,9 +214,13 @@ To assign a `BusyRetries` in the sendFaxRequest, the request should be similar t
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -233,9 +253,13 @@ To assign a fax to have a `Resolution` in the request similar to the following e
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -271,9 +295,13 @@ To assign a `Resolution` in the sendFaxRequest, the request should be similar to
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -309,9 +337,13 @@ To assign a fax to have a `FaxDitheringTechnique` in the request similar to the 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
             apiFaxDocument.DitheringTechniqueSpecified = true;
             apiFaxDocument.DitheringTechnique = faxDitheringTechnique.DETAILED;
@@ -347,9 +379,13 @@ The Timezone will be used to format the datetime display in the fax header, a re
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -382,9 +418,13 @@ To assign a `TimeZone` in the sendFaxRequest, the request should be similar to t
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -417,9 +457,13 @@ Allows the header format that appears at the top of the transmitted fax to be ch
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -457,9 +501,13 @@ To assign a `HeaderFormat` in the sendFaxRequest, the request should be similar 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -491,9 +539,13 @@ Assigning a `CLI` in the `apiFaxMessage`, a request similar to the following exa
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -525,9 +577,13 @@ Assigning a `CLI` in the `sendFaxRequest`, a request similar to the following ex
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -559,9 +615,13 @@ To send fax with SendFrom in apiFaxMessage a request similar to the following ex
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -598,9 +658,13 @@ To send fax with SendFrom in sendFaxRequest a request similar to the following e
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -636,9 +700,13 @@ To send fax with DNCR in apiFaxMessage, you need to set "dncrSpecified" to true 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -676,9 +744,13 @@ To send fax with DNCR in sendFaxRequest, you need to set "dncrSpecified" to true
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -716,9 +788,13 @@ To send fax with FPS in apiFaxMessage, you need to set "fpsSpecified" to true in
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -755,9 +831,13 @@ To send fax with FPS in sendFaxRequest, you need to set "fpsSpecified" to true i
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -794,9 +874,13 @@ To send fax with Smartblock in apiFaxMessage, you need to set "smartblockSpecifi
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -833,9 +917,13 @@ To send fax with Smartblock in sendFaxRequest, you need to set "smartblockSpecif
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -871,9 +959,13 @@ To set a ScheduledStartTime for ApiFaxMessage, a request must similar to the fol
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -906,9 +998,13 @@ To set a ScheduledStartTime for SendFaxRequest, a request must similar to the fo
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -941,9 +1037,13 @@ To set a MustBeSentBeforeDate for ApiFaxMessage, you need to set the value of "M
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -977,9 +1077,13 @@ To set a MustBeSentBeforeDate for SendFaxRequest, you need to set the value of "
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -1014,9 +1118,13 @@ To set a MaxFaxPages for ApiFaxMessage, you need to set the value of "MaxFaxPage
 ```C#
          private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -1050,10 +1158,14 @@ To set a MaxFaxPages for SendFaxRequest, you need to set the value of "MaxFaxPag
 
 ```C#
          private static void sendFaxSample(ApiService apiClient)
-        {
+        { 
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -1087,9 +1199,13 @@ To send faxes to multiple destinations a request similar to the following exampl
 ```C#
         private static void sendFaxSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -1131,10 +1247,13 @@ This method is recommended for broadcasting as it takes advantage of the multipl
 ```C#
 private static void sendFaxSample(ApiService apiClient)
         {
-        
+	    // Converts file to base64 string data.
+            Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             //create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             //create an array of api fax documents.
@@ -1876,10 +1995,14 @@ This function allows you to upload a document and save it under a document refer
 ```c#
 private static void saveFaxDocumentSample(ApiService apiClient)
         {
+	    // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = System.Convert.ToBase64String(bytes);
+	    
             //create a saveFaxDocumentRequest.
             saveFaxDocumentRequest saveFaxDocumentRequest = new saveFaxDocumentRequest();
             saveFaxDocumentRequest.FileName = "test.txt";
-            saveFaxDocumentRequest.FileData = "tiffDataBase64==";
+            saveFaxDocumentRequest.FileData = base64StringOfFile;
             saveFaxDocumentRequest.DocumentRef = "doc-ref-xxx"; //note that documentRef must be unique! TODO: Change this!
 
             //call the saveFaxDocument method.

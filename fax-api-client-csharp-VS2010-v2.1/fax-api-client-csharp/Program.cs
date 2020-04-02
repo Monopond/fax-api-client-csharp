@@ -46,9 +46,13 @@ namespace fax_api_client_csharp
 
         private static void sendFaxSample(ApiService apiClient)
         {
+            // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(FILE_LOCATION);
+            string base64StringOfFile = Convert.ToBase64String(bytes);
+            
             // create a new fax document.
             apiFaxDocument apiFaxDocument = new apiFaxDocument();
-            apiFaxDocument.FileData = "VGhpcyBpcyBhIGZheA==";
+            apiFaxDocument.FileData = base64StringOfFile;
             apiFaxDocument.FileName = "test.txt";
 
             // create an array of api fax documents.
@@ -507,26 +511,29 @@ namespace fax_api_client_csharp
 
         private static string sample_TiffFileData()
         {
-            //note: We are reading from a text file since the base64 equivalent is too long.
-            string text = System.IO.File.ReadAllText(@"..\..\sampleTiffBase64.txt");
-            
-            return text;
+            // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(@"..\..\sampleTiffBase64.txt");
+            string base64StringOfFile = Convert.ToBase64String(bytes);
+           
+            return base64StringOfFile;
         }
 
         private static string sample_StampData()
         {
-            //note: We are reading from a text file since the base64 equivalent is too long.
-            string text = System.IO.File.ReadAllText(@"..\..\sampleStampBase64.txt");
-
-            return text;
+            // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(@"..\..\sampleTiffBase64.txt");
+            string base64StringOfFile = Convert.ToBase64String(bytes);
+            
+            return base64StringOfFile;
         }
 
         private static string sample_DocxFileData() 
         {
-            //note: We are reading from a text file since the base64 equivalent is too long.
-            string text = System.IO.File.ReadAllText(@"..\..\sampleDocxBase64.txt");
-
-            return text; 
+            // Converts file to base64 string data.
+	    Byte[] bytes = File.ReadAllBytes(@"..\..\sample.docx");
+            string base64StringOfFile = Convert.ToBase64String(bytes);
+            
+            return base64StringOfFile;
         }
     }
 }
